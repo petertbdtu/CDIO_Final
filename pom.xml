@@ -30,7 +30,7 @@
 	  <groupId>diplomitdtu</groupId>
       <artifactId>matadorgui</artifactId>
       <version>3.1.3</version>
-	</depencency>
+	</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
