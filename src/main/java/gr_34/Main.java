@@ -1,4 +1,4 @@
-package gr_34.CDIO_Final;
+package gr_34;
 
 /**
  * Hello world!
