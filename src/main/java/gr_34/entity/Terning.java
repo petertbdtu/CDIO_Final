@@ -2,7 +2,7 @@ package gr_34.entity;
 
 /**
  * Terningklasse taget fra cdio1 og modificeret så den passer til vores
- * programspil...test
+ * programspil
  * 
  * @author Andreas
  * @author Asef
