@@ -1,6 +1,6 @@
 package gr_34.entity;
 
-public class Felt {
+public abstract class Felt {
 	
 	private String beskrivelse;
 	private String subText;
