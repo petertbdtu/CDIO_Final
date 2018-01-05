@@ -18,7 +18,6 @@ public class GUIBoundary {
 		this.players = players;
 		for (GUI_Player p : players)
 			this.gui.addPlayer(p);
-		
 	}
 	
 	public void flytSpiller(GUI_Player p, int gammelPos, int nyPos)
