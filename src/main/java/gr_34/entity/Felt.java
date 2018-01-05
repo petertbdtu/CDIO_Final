@@ -1,16 +1,16 @@
 package gr_34.entity;
 
-import java.awt.Color;
-
 public class Felt {
 	
 	private String beskrivelse;
 	private String subText;
-	private Spiller ejer;
-	private int pris;
-	private Color farve;
 	private String titel;
 	
+	public Felt(String beskrivelse, String subText, String titel) {
+		this.beskrivelse = beskrivelse;
+		this.subText = subText;
+		this.titel = titel;
+	}
 	public String getTitel() {
 		return titel;
 	}
@@ -22,24 +22,6 @@ public class Felt {
 	}
 	public void setBeskrivelse(String beskrivelse) {
 		this.beskrivelse = beskrivelse;
-	}
-	public Spiller getEjer() {
-		return ejer;
-	}
-	public void setEjer(Spiller ejer) {
-		this.ejer = ejer;
-	}
-	public int getPris() {
-		return pris;
-	}
-	public void setPris(int pris) {
-		this.pris = pris;
-	}
-	public Color getFarve() {
-		return farve;
-	}
-	public void setFarve(Color farve) {
-		this.farve = farve;
 	}
 	public void setSubText(String subText) {
 		this.subText = subText;
