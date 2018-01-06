@@ -48,28 +48,15 @@ public class MatadorController {
 		int AntalSpillere;
 		AntalSpillere = AntalSpillere();
 		
-		// Lav array af spillere og Udfyld arrayet
+		// Init array af spillere og Udfyld arrayet
 		GUI_Player[] players = new GUI_Player[AntalSpillere];
 		players = OpretSpillere(AntalSpillere);
-				
-		GUI_Field[] fields = new GUI_Field[40];
-		GUI.setNull_fields_allowed(true);
-
-		//Dette er så simpelt som det kan blive.
-		fields[0] = new GUI_Street();
-
-		//Der tilføjes et par værdier.
-
-		GUI_Street testStreet= new GUI_Street();
-		testStreet.setTitle("Anker Engelundsvej");
-		testStreet.setBorder(Color.CYAN); //Useful to show owner
-		testStreet.setRent("600,-");
-		fields[1] = testStreet;	
 		
-		//Der findes andre typer af felter.
-        fields[2] = new GUI_Shipping();
-        fields[2].setForeGroundColor(Color.PINK);
+		// Init array af felter og udfyld arrayet 
+		GUI_Field[] fields = new GUI_Field[40];
+        fields = OpretFelter();
         
+        // Opret spillebrættet på bagrund af felter og spillere
 		this.grafics = new GUIBoundary(fields, players);
 	}
 	
@@ -113,4 +100,28 @@ public class MatadorController {
 		}
 		return players;
 	}
+	
+	public GUI_Field[] OpretFelter() {
+		GUI_Field[] fields = new GUI_Field[40];
+		GUI.setNull_fields_allowed(true);
+
+		//Dette er så simpelt som det kan blive.
+		fields[0] = new GUI_Street();
+
+		//Der tilføjes et par værdier.
+		GUI_Street testStreet= new GUI_Street();
+		testStreet.setTitle("Anker Engelundsvej");
+		testStreet.setBorder(Color.CYAN); //Useful to show owner
+		testStreet.setRent("600,-");
+		fields[1] = testStreet;	
+		
+		//Der findes andre typer af felter.
+        fields[2] = new GUI_Shipping();
+        fields[2].setForeGroundColor(Color.PINK);
+        
+        // TODO - Udfyld med resten af de påkrævede felter
+        
+        return fields;
+	}
+
 }
