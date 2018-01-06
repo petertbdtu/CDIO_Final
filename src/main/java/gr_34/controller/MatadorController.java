@@ -70,6 +70,7 @@ public class MatadorController {
 	      }  
 	}
 	
+	// AntalSpillere funktionen beder brugeren om at inputte en antal spillere og returnere det indtastede tal
 	public int AntalSpillere() {
 				// Få antal spillere til spillet. 
 				int AntalSpillere = 0;	
@@ -89,6 +90,7 @@ public class MatadorController {
 				return AntalSpillere;
 	} 
 	
+	// OpretSpillere funktionen spørger brugeren om navne på de ønskede spillere og returnere et array af GUI_Player med navne og start beløb på 30000
 	public GUI_Player[] OpretSpillere(int AntalSpillere) {
 		// Opret array der indeholder spillere
 		GUI_Player[] players = new GUI_Player[AntalSpillere];
@@ -101,6 +103,7 @@ public class MatadorController {
 		return players;
 	}
 	
+	// OpretFelter returnerer et array af GUI_Field
 	public GUI_Field[] OpretFelter() {
 		GUI_Field[] fields = new GUI_Field[40];
 		GUI.setNull_fields_allowed(true);
