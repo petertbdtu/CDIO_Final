@@ -1,7 +1,8 @@
 package gr_34.controller;
-
+import javax.swing.*;
 import java.awt.Color;
-
+import java.util.ArrayList;
+import java.util.List;
 import gr_34.boundary.GUIBoundary;
 import gui_fields.*;
 import gui_main.GUI;
@@ -43,6 +44,19 @@ public class MatadorController {
 
 	public void playGame()
 	{
+		// Få antal spillere til spillet -- Bedre håndtering af bruger input 
+		int AntalSpillere = 0;
+		AntalSpillere = Integer.parseInt(JOptionPane.showInputDialog("Indtast antal spillere: "));
+		
+		// Opret array der indeholder spillere
+		GUI_Player[] players = new GUI_Player[AntalSpillere];
+		// For hver spiller, bed om spillerens navn og tilføj det til arrayet
+		for (int i = 0; i < AntalSpillere; i++) {
+			String SpillerNavn = JOptionPane.showInputDialog("Indtast spiller " + String.valueOf(i + 1) + "'s navn: ");
+			GUI_Player Spiller = new GUI_Player(SpillerNavn);
+			players[i] = Spiller;
+		}
+		
 		GUI_Field[] fields = new GUI_Field[40];
 		GUI.setNull_fields_allowed(true);
 
@@ -60,8 +74,6 @@ public class MatadorController {
 		//Der findes andre typer af felter.
         fields[2] = new GUI_Shipping();
         fields[2].setForeGroundColor(Color.PINK);
-        
-        GUI_Player[] players = {new GUI_Player("bob"), new GUI_Player("al")};
         
 		this.grafics = new GUIBoundary(fields, players);
 	}
