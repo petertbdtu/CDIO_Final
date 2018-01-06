@@ -1,8 +1,6 @@
 package gr_34.controller;
 import javax.swing.*;
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 import gr_34.boundary.GUIBoundary;
 import gui_fields.*;
 import gui_main.GUI;
@@ -58,6 +56,7 @@ public class MatadorController {
         
         // Opret spillebrættet på bagrund af felter og spillere
 		this.grafics = new GUIBoundary(fields, players);
+		
 	}
 	
 	// TryParseInt funktionen forsøger at omsætte input parameteret value om til en integer. Fejler den vil den ikke returnere true men går ned i Catch blokken og returnere false.
