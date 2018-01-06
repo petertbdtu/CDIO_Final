@@ -44,18 +44,14 @@ public class MatadorController {
 
 	public void playGame()
 	{
+		// Få Antal spillere
 		int AntalSpillere;
 		AntalSpillere = AntalSpillere();
 		
-		// Opret array der indeholder spillere
+		// Lav array af spillere og Udfyld arrayet
 		GUI_Player[] players = new GUI_Player[AntalSpillere];
-		// For hver spiller, bed om spillerens navn og tilføj det til arrayet
-		for (int i = 0; i < AntalSpillere; i++) {
-			String SpillerNavn = JOptionPane.showInputDialog("Indtast spiller " + String.valueOf(i + 1) + "'s navn: ");
-			GUI_Player Spiller = new GUI_Player(SpillerNavn, 30000); // Her er sat 30000,- ind. vurdér om vi skal lave noget til at håndtere de enkelte sedler
-			players[i] = Spiller;
-		}
-		
+		players = Spillere(AntalSpillere);
+				
 		GUI_Field[] fields = new GUI_Field[40];
 		GUI.setNull_fields_allowed(true);
 
@@ -76,6 +72,7 @@ public class MatadorController {
         
 		this.grafics = new GUIBoundary(fields, players);
 	}
+	
 	// TryParseInt funktionen forsøger at omsætte input parameteret value om til en integer. Fejler den vil den ikke returnere true men går ned i Catch blokken og returnere false.
 	boolean tryParseInt(String value) {  
 	     try {  
@@ -85,6 +82,7 @@ public class MatadorController {
 	         return false;  
 	      }  
 	}
+	
 	public int AntalSpillere() {
 				// Få antal spillere til spillet. 
 				int AntalSpillere = 0;	
@@ -104,4 +102,15 @@ public class MatadorController {
 				return AntalSpillere;
 	} 
 	
+	public GUI_Player[] Spillere(int AntalSpillere) {
+		// Opret array der indeholder spillere
+		GUI_Player[] players = new GUI_Player[AntalSpillere];
+		// For hver spiller, bed om spillerens navn og tilføj det til arrayet
+		for (int i = 0; i < AntalSpillere; i++) {
+			String SpillerNavn = JOptionPane.showInputDialog("Indtast spiller " + String.valueOf(i + 1) + "'s navn: ");
+			GUI_Player Spiller = new GUI_Player(SpillerNavn, 30000); // Her er sat 30000,- ind. vurdér om vi skal lave noget til at håndtere de enkelte sedler
+			players[i] = Spiller;
+		}
+		return players;
+	}
 }
