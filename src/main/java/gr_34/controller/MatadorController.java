@@ -50,7 +50,7 @@ public class MatadorController {
 		
 		// Lav array af spillere og Udfyld arrayet
 		GUI_Player[] players = new GUI_Player[AntalSpillere];
-		players = Spillere(AntalSpillere);
+		players = OpretSpillere(AntalSpillere);
 				
 		GUI_Field[] fields = new GUI_Field[40];
 		GUI.setNull_fields_allowed(true);
@@ -102,7 +102,7 @@ public class MatadorController {
 				return AntalSpillere;
 	} 
 	
-	public GUI_Player[] Spillere(int AntalSpillere) {
+	public GUI_Player[] OpretSpillere(int AntalSpillere) {
 		// Opret array der indeholder spillere
 		GUI_Player[] players = new GUI_Player[AntalSpillere];
 		// For hver spiller, bed om spillerens navn og tilføj det til arrayet
