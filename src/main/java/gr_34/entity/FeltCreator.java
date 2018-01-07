@@ -8,7 +8,7 @@ public class FeltCreator {
 	
 	public static AbstraktFelt[] getFelter() {
 		AbstraktFelt[] felter = new AbstraktFelt[40];
-		felter[0] = new StartFelt("", "", "");
+		felter[0] = new StartFelt("De modtager 200kr", "", "START");
 		int[] leje = {2, 10, 30, 90, 160, 250};
 		felter[1] = new Gade("", "", "Rødovrevej", 60, 30, Color.GRAY, leje, 10);
 		felter[2] = new ChanceFelt("", "Prøv lykken", "Prøv lykken");
