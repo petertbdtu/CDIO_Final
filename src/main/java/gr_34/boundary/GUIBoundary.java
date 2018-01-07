@@ -34,14 +34,9 @@ public class GUIBoundary {
 			
 			if (felter[i] instanceof Gade)
 			{
-				Gade g = (Gade) felter[i];
-				
-				Integer pris = g.getPris();
-				String prisString = pris.toString();
-				
 				fields[i] = new GUI_Street();
-				fields[i].setBackGroundColor( g.getFarve() );
-				fields[i].setSubText( prisString );
+				fields[i].setBackGroundColor( ((Gade) felter[i]).getFarve() );
+				fields[i].setSubText( String.valueOf( ((Gade) felter[i]).getPris()) );
 				
 			}
 			else if (felter[i] instanceof ChanceFelt)
@@ -51,31 +46,42 @@ public class GUIBoundary {
 			else if (felter[i] instanceof Rederi)
 			{
 				fields[i] = new GUI_Shipping();
+				fields[i].setSubText( String.valueOf( ((Rederi) felter[i]).getPris()) );
 			}
 			else if (felter[i] instanceof Bryggeri)
 			{
 				fields[i] = new GUI_Brewery();
+				fields[i].setSubText( String.valueOf( ((Bryggeri) felter[i]).getPris()) );
 			}
 			else if (felter[i] instanceof StartFelt)
 			{
 				fields[i] = new GUI_Start();
 			}
-			else if (felter[i] instanceof Fængsel || felter[i] instanceof GåIFængsel)
+			else if (felter[i] instanceof Fængsel)
 			{
 				fields[i] = new GUI_Jail();
+				fields[i].setSubText("Fængsel");
+			}
+			else if (felter[i] instanceof GåIFængsel)
+			{
+				fields[i] = new GUI_Jail();
+				fields[i].setSubText("Gå i fængsel");
 			}
 			else if (felter[i] instanceof BetalSkatFelt)
 			{
 				fields[i] = new GUI_Tax();
+				fields[i].setSubText("Betal skat");
 			}
 			else if (felter[i] instanceof Parkering)
 			{
 				fields[i] = new GUI_Refuge();
+				fields[i].setSubText("Helle");
 			}
 			
-			fields[i].setTitle(felter[i].getTitel());
+			// Hvis chancefelt har titel, forsvinder spørgsmålstegn
+			if (!(felter[i] instanceof ChanceFelt))
+				fields[i].setTitle(felter[i].getTitel());
 			fields[i].setDescription(felter[i].getBeskrivelse());
-			//fields[i].setSubText(felter[i].getSubText());
 			
 		}
 	}
