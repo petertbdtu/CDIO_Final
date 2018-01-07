@@ -25,7 +25,7 @@ public class GUIBoundary {
 		indlæsFelter(felter);
 		this.gui = new GUI(fields);
 	}
-	
+
 	private void indlæsFelter(AbstraktFelt[] felter)
 	{
 		fields = new GUI_Field[felter.length];
@@ -34,7 +34,15 @@ public class GUIBoundary {
 			
 			if (felter[i] instanceof Gade)
 			{
+				Gade g = (Gade) felter[i];
+				
+				Integer pris = g.getPris();
+				String prisString = pris.toString();
+				
 				fields[i] = new GUI_Street();
+				fields[i].setBackGroundColor( g.getFarve() );
+				fields[i].setSubText( prisString );
+				
 			}
 			else if (felter[i] instanceof ChanceFelt)
 			{
@@ -67,14 +75,21 @@ public class GUIBoundary {
 			
 			fields[i].setTitle(felter[i].getTitel());
 			fields[i].setDescription(felter[i].getBeskrivelse());
-			fields[i].setSubText(felter[i].getSubText());
+			//fields[i].setSubText(felter[i].getSubText());
 			
 		}
 	}
 	
 	public int anmodIntMinMax(String msg, int min, int max)
 	{
-		return gui.getUserInteger(msg, min, max);
+		int i = 0;
+		
+		do
+		{
+			i = gui.getUserInteger(msg, min, max);
+		} while (min <= i && i <= max);
+		
+		return i;
 	}
 	
 	public String anmodString(String msg)

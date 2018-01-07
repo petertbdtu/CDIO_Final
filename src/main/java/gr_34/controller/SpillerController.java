@@ -11,6 +11,7 @@ public class SpillerController {
 	public SpillerController (GUIBoundary guiB)
 	{
 		this.guiB = guiB;
+		
 		int antalSpillere = guiB.anmodIntMinMax("Vælg antal spillere, mellem 2-6", 2, 6);
 		int startBalance = 30000;
 		
