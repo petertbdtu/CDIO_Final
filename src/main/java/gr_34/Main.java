@@ -1,7 +1,6 @@
 package gr_34;
 
 import gr_34.controller.MatadorController;
-import gr_34.entity.Raflebæger;
 
 /**
  * Hello world!
