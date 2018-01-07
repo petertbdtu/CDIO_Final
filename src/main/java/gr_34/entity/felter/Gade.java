@@ -17,4 +17,34 @@ public class Gade extends AbstraktEjendom {
 		this.bygningPris = bygningPris;
 		antalBygning = 0;
 	}
+
+	public int getBygningPris() {
+		return bygningPris;
+	}
+
+	public void setBygningPris(int bygningPris) {
+		this.bygningPris = bygningPris;
+	}
+
+	public int getAntalBygning() {
+		return antalBygning;
+	}
+
+	public void setAntalBygning(int antalBygning) {
+		this.antalBygning = antalBygning;
+	}
+
+	public Color getFarve() {
+		return farve;
+	}
+
+	public int[] getLeje() {
+		return leje;
+	}
+
+	public void setLeje(int[] leje) {
+		this.leje = leje;
+	}
+	
+	
 }
