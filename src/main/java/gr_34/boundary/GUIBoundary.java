@@ -1,10 +1,6 @@
 package gr_34.boundary;
 
-import gr_34.entity.AbstraktFelt;
-import gr_34.entity.Bryggeri;
-import gr_34.entity.Gade;
-import gr_34.entity.Rederi;
-import gr_34.entity.Spiller;
+import gr_34.entity.Felter.*;
 import gui_fields.GUI_Brewery;
 import gui_fields.GUI_Chance;
 import gui_fields.GUI_Field;
@@ -55,13 +51,17 @@ public class GUIBoundary {
 			{
 				fields[i] = new GUI_Start();
 			}
-			else if (felter[i] instanceof FængselFelt || felter[i] instanceof GåIFængsel)
+			else if (felter[i] instanceof Fængsel || felter[i] instanceof GåIFængsel)
 			{
 				fields[i] = new GUI_Jail();
 			}
 			else if (felter[i] instanceof BetalSkatFelt)
 			{
 				fields[i] = new GUI_Tax();
+			}
+			else if (felter[i] instanceof Parkering)
+			{
+				fields[i] = new GUI_Refuge();
 			}
 			
 			fields[i].setTitle(felter[i].getTitel());
