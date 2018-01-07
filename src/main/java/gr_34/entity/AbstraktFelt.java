@@ -1,12 +1,12 @@
 package gr_34.entity;
 
-public abstract class Felt {
+public abstract class AbstraktFelt {
 	
 	private String beskrivelse;
 	private String subText;
 	private String titel;
 	
-	public Felt(String beskrivelse, String subText, String titel) {
+	public AbstraktFelt(String beskrivelse, String subText, String titel) {
 		this.beskrivelse = beskrivelse;
 		this.subText = subText;
 		this.titel = titel;

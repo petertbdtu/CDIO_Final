@@ -1,6 +1,6 @@
 package gr_34.entity;
 
-public abstract class AbstraktEjendom extends Felt {
+public abstract class AbstraktEjendom extends AbstraktFelt {
 
 	private int pris;
 	private Spiller ejer;
