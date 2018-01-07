@@ -1,6 +1,6 @@
 package gr_34.controller;
 
-import gr_34.entity.Felter.*;
+import gr_34.entity.felter.*;
 import gr_34.entity.FeltCreator;
 
 public class BrætController {
