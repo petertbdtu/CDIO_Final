@@ -1,6 +1,7 @@
 package gr_34.boundary;
 
 import gr_34.entity.Felter.*;
+import gr_34.entity.Spiller;
 import gui_fields.GUI_Brewery;
 import gui_fields.GUI_Chance;
 import gui_fields.GUI_Field;
