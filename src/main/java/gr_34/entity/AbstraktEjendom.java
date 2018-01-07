@@ -20,10 +20,6 @@ public abstract class AbstraktEjendom extends AbstraktFelt {
 		return this.pant;
 	}
 
-	public Color getFarve() {
-		return farve;
-	}
-
 	public Spiller getEjer() {
 		return this.ejer;
 	}
