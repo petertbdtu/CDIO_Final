@@ -1,4 +1,4 @@
-package gr_34.entity;
+package gr_34.entity.felter;
 
 import java.awt.Color;
 
