@@ -93,7 +93,7 @@ public class GUIBoundary {
 		do
 		{
 			i = gui.getUserInteger(msg, min, max);
-		} while (min <= i && i <= max);
+		} while (i < min || i > max);
 		
 		return i;
 	}
