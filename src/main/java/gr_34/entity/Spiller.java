@@ -4,9 +4,19 @@ public class Spiller {
 	private String navn;
 	private Konto konto;
 	
-	public Spiller(String navn, Konto konto) {
-		this.konto = konto;
+	public Spiller(String navn, int startBalance) {
+		this.konto = new Konto(startBalance);
 		this.navn = navn;
+	}
+	
+	public String getNavn()
+	{
+		return navn;
+	}
+	
+	public int getPenge()
+	{
+		return konto.getPenge();
 	}
 	
 	public void tilføjPenge(int beløb) {
