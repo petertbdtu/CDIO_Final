@@ -1,5 +1,7 @@
 package gr_34.entity.felter;
 
+import gr_34.entity.Spiller;
+
 public abstract class AbstraktEjendom extends AbstraktFelt {
 
 	private int pris;
