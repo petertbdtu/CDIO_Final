@@ -7,10 +7,9 @@ public abstract class AbstraktEjendom extends AbstraktFelt {
 	private int pant;
 	
 	public AbstraktEjendom(String beskrivelse, String subText, String titel, int pris, 
-			Spiller ejer, int pant) {
+			int pant) {
 		super(beskrivelse, subText, titel);
 		this.pris = pris;
-		this.ejer = ejer;
 		this.pant = pant;
 	}
 	public void setPant(int pant) {

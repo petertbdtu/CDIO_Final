@@ -10,8 +10,8 @@ public class Gade extends AbstraktEjendom {
 	private Color farve;
 
 	public Gade(String beskrivelse, String subText, String titel, int pris, 
-			Spiller ejer, int pant, Color farve, int[] leje, int bygningPris) {
-		super(beskrivelse, subText, titel, pris, ejer, pant);
+			int pant, Color farve, int[] leje, int bygningPris) {
+		super(beskrivelse, subText, titel, pris, pant);
 		this.leje = leje;
 		this.farve = farve;
 		this.bygningPris = bygningPris;
