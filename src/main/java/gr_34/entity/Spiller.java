@@ -3,6 +3,7 @@ package gr_34.entity;
 public class Spiller {
 	private String navn;
 	private Konto konto;
+	private int position;
 	
 	public Spiller(String navn, int startBalance) {
 		this.konto = new Konto(startBalance);
@@ -19,6 +20,14 @@ public class Spiller {
 		return konto.getPenge();
 	}
 	
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
+	
 	public void tilføjPenge(int beløb) {
 		int sum;
 		sum = konto.getPenge()+beløb;
@@ -33,4 +42,5 @@ public class Spiller {
 		} else
 			konto.setPenge(sum);
 	}
+	
 }
