@@ -56,6 +56,7 @@ public class GUIBoundary {
 			else if (felter[i] instanceof StartFelt)
 			{
 				fields[i] = new GUI_Start();
+				fields[i].setSubText(" ");
 			}
 			else if (felter[i] instanceof Fængsel)
 			{
@@ -101,6 +102,10 @@ public class GUIBoundary {
 	public String anmodString(String msg)
 	{
 		return gui.getUserString(msg);
+	}
+	
+	public void sendBesked(String msg) {
+		gui.showMessage(msg);
 	}
 	
 	public void indlæsSpillere(Spiller[] spillere)
