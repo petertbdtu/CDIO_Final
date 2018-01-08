@@ -3,9 +3,20 @@ package gr_34.spillogik;
 import gr_34.boundary.GUIBoundary;
 import gr_34.controller.BrætController;
 import gr_34.controller.EjendomController;
-import gr_34.controller.SpillerController;
 import gr_34.controller.Raflebæger;
+import gr_34.controller.SpillerController;
 import gr_34.entity.Spiller;
+import gr_34.entity.felter.AbstraktEjendom;
+import gr_34.entity.felter.AbstraktFelt;
+import gr_34.entity.felter.BetalSkatFelt;
+import gr_34.entity.felter.Bryggeri;
+import gr_34.entity.felter.ChanceFelt;
+import gr_34.entity.felter.Fængsel;
+import gr_34.entity.felter.Gade;
+import gr_34.entity.felter.GåIFængsel;
+import gr_34.entity.felter.Parkering;
+import gr_34.entity.felter.Rederi;
+import gr_34.entity.felter.StartFelt;
 
 public class MatadorLogik {
 	private SpillerController s;
@@ -28,6 +39,35 @@ public class MatadorLogik {
 		}
 		g.flytSpiller(s.getNutidigSpillerIndex(), gammelPosition, nyPosition);
 		
+		AbstraktFelt ramtFelt = b.getFelt(nyPosition);
+		
+		if (ramtFelt instanceof AbstraktEjendom)
+		{
+			e.ramtEjendom( (AbstraktEjendom) ramtFelt, nutidigSpiller);
+		}
+		else if (ramtFelt instanceof ChanceFelt)
+		{
+			//TODO Chance logik
+		}
+		else if (ramtFelt instanceof StartFelt)
+		{
+			//TODO StartFelt Logik
+		}
+		else if (ramtFelt instanceof Fængsel)
+		{
+			//TODO Fængsel Logik
+		}
+		else if (ramtFelt instanceof GåIFængsel)
+		{
+			//TODO GåIFængsel Logik
+		}
+		else if (ramtFelt instanceof BetalSkatFelt)
+		{
+	
+		}
+		else if (ramtFelt instanceof Parkering)
+		{
+		}
 		
 	}
 }
