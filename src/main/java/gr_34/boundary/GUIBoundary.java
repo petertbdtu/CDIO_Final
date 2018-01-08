@@ -107,7 +107,11 @@ public class GUIBoundary {
 	public void sendBesked(String msg) {
 		gui.showMessage(msg);
 	}
-	
+
+	/**
+	 * Tilføjer spillere til brættet. Rækkefølgen af arrayet er relevant i andre metoder.
+	 * @param spillere
+	 */
 	public void indlæsSpillere(Spiller[] spillere)
 	{
 		players = new GUI_Player[spillere.length];
@@ -120,9 +124,15 @@ public class GUIBoundary {
 		}
 	}
 	
-	public void flytSpiller(GUI_Player p, int gammelPos, int nyPos)
+	/**
+	 * Spillerne er i samme rækkefølge som de kommer ind i indlæsSpillere
+	 * @param spillerIndex
+	 * @param gammelPos
+	 * @param nyPos
+	 */
+	public void flytSpiller(int spillerIndex, int gammelPos, int nyPos)
 	{
-		this.fields[gammelPos].setCar(p, false);
-		this.fields[nyPos].setCar(p, true);
+		this.fields[gammelPos].setCar(players[spillerIndex], false);
+		this.fields[nyPos].setCar(players[spillerIndex], true);
 	}
 }
