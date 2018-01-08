@@ -49,15 +49,4 @@ public class SpillerController {
 		return nutidigSpillerIndex;
 	}
 	
-	public void tilføjPengeTilNutidigSpiller(int beløb)
-	{
-		spillere[nutidigSpillerIndex].tilføjPenge(beløb);
-		
-	}
-	
-	public void fratrækPengeFraNutidigSpiller(int beløb)
-	{
-		spillere[nutidigSpillerIndex].fratrækPenge(beløb);
-		
-	}
 }
