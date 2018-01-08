@@ -4,10 +4,10 @@ import gr_34.boundary.GUIBoundary;
 import gr_34.controller.BrætController;
 import gr_34.controller.EjendomController;
 import gr_34.controller.SpillerController;
-import gr_34.entity.Raflebæger;
+import gr_34.controller.Raflebæger;
 import gr_34.entity.Spiller;
 
-public class Matadorlogik {
+public class MatadorLogik {
 	private SpillerController s;
 	private BrætController b;
 	private EjendomController e;
@@ -26,6 +26,8 @@ public class Matadorlogik {
 			g.sendBesked(navn + "har passeret start feltet, de modtager 200kr");
 			nutidigSpiller.tilføjPenge(200);
 		}
-		g.flytSpiller(nutidigSpiller, gammelPosition, nyPosition);
+		g.flytSpiller(s.getNutidigSpillerIndex(), gammelPosition, nyPosition);
+		
+		
 	}
 }

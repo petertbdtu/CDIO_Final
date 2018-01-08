@@ -17,4 +17,8 @@ public class BrætController {
 		return this.felter;
 	}
 	
+	public AbstraktFelt getFelt(int position)
+	{
+		return felter[position];
+	}
 }
