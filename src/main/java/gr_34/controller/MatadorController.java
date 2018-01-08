@@ -1,9 +1,6 @@
 package gr_34.controller;
-import javax.swing.*;
-import java.awt.Color;
+
 import gr_34.boundary.GUIBoundary;
-import gui_fields.*;
-import gui_main.GUI;
 
 public class MatadorController {
 	// DiceCup diceCup;
@@ -49,6 +46,14 @@ public class MatadorController {
 		sc.opretSpillere(1500);
 
 		guiB.indlæsSpillere(sc.getSpillere());
+		
+//		MatadorLogik matador = new MatadorLogik( alle controllere? )
+//		
+//		while (!matador.erVundet())
+//		{
+//			matador.udførTur();
+//		}
+		
 		
 	}
 
