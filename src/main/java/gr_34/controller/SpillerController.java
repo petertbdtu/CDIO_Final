@@ -7,7 +7,7 @@ public class SpillerController {
 	private GUIBoundary guiB;
 	private Spiller[] spillere;
 	private int antalSpillere;
-	private int nutidigSpiller;
+	private int nutidigSpillerIndex;
 	
 	public SpillerController (GUIBoundary guiB)
 	{
@@ -35,10 +35,17 @@ public class SpillerController {
 		return spillere;
 	}
 	
-	public Spiller næsteSpiller()
+	public void gåTilNæsteSpiller()
 	{
-		nutidigSpiller = (nutidigSpiller+1) % antalSpillere;
-		Spiller p = spillere[nutidigSpiller];
-		return p;
+		nutidigSpillerIndex = (nutidigSpillerIndex+1) % antalSpillere;
+	}
+	
+	public Spiller getNutidigSpiller() 
+	{
+		return spillere[nutidigSpillerIndex];
+	}
+	public int getNutidigSpillerIndex()
+	{
+		return nutidigSpillerIndex;
 	}
 }
