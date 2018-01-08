@@ -1,4 +1,5 @@
-package gr_34.entity;
+package gr_34.controller;
+import gr_34.entity.Terning;
 
 public class Raflebæger {
 	private int sum;

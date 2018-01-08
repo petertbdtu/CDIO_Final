@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import gr_34.entity.Raflebæger;
+import gr_34.controller.Raflebæger;
 
 public class RaflebægerTest {
 	
