@@ -46,6 +46,7 @@ public class MatadorController {
 		GUIBoundary guiB = new GUIBoundary(bræt.getFelter());
 		
 		SpillerController sc = new SpillerController(guiB);
+		sc.opretSpillere(1500);
 
 		guiB.indlæsSpillere(sc.getSpillere());
 		

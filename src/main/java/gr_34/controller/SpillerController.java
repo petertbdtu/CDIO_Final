@@ -6,26 +6,28 @@ import gr_34.entity.Spiller;
 public class SpillerController {
 	private GUIBoundary guiB;
 	private Spiller[] spillere;
+	private int antalSpillere;
 	private int nutidigSpiller;
 	
 	public SpillerController (GUIBoundary guiB)
 	{
 		this.guiB = guiB;
-		
-		int antalSpillere = guiB.anmodIntMinMax("Vælg antal spillere, mellem 2-6", 2, 6);
-		int startBalance = 1500;
+	}
+	
+	/**
+	 * 
+	 * @param startBalance
+	 */
+	public void opretSpillere(int startBalance)
+	{
+		antalSpillere = this.guiB.anmodIntMinMax("Vælg antal spillere, mellem 2-6", 2, 6);
 		
 		spillere = new Spiller[antalSpillere];
 		for (int i = 0; i < antalSpillere; i++)
 		{
-			String navn = guiB.anmodString("Indtast " + i +". spillers navn");
+			String navn = this.guiB.anmodString("Indtast " + i +". spillers navn");
 			spillere[i] = new Spiller(navn, startBalance);
 		}
-	}
-	
-	public void opretSpillere()
-	{
-		// TODO Opret spillere gennem GUI
 	}
 	
 	public Spiller[] getSpillere()
@@ -35,8 +37,8 @@ public class SpillerController {
 	
 	public Spiller næsteSpiller()
 	{
+		nutidigSpiller = (nutidigSpiller+1) % antalSpillere;
 		Spiller p = spillere[nutidigSpiller];
-		nutidigSpiller++;
 		return p;
 	}
 }
