@@ -109,8 +109,8 @@ public class GUIBoundary {
 		
 		for (int i = 0; i < spillere.length; i++)
 		{
-			players[i].setName(spillere[i].getNavn());
-			players[i].setBalance(spillere[i].getPenge());
+			Spiller spiller = spillere[i];
+			players[i] = new GUI_Player(spiller.getNavn(), spiller.getPenge());
 			gui.addPlayer(players[i]);
 		}
 	}
