@@ -115,7 +115,20 @@ public class EjendomController {
 	
 	private void ramtUkøbtEjendom(AbstraktEjendom ejendom, Spiller spiller)
 	{
-		g.sendBesked(spiller.getNavn() + " lander på " + ejendom.getTitel() + " som er til salg. KOD VIDERE!");
-		//g.anmodValg?("Vil de købe denne (EJENDOM) til (PRIS)?", "Køb", "Sæt til auktion");
+		g.sendBesked(spiller.getNavn() + " lander på " + ejendom.getTitel() + " som er til salg.");
+		
+		String valg = g.anmodValgKnap(spiller.getNavn() + ", vil de købe " + ejendom.getTitel() +
+				" til " + ejendom.getPris() + "?", "Køb", "Sæt til auktion");
+		
+		if (valg.equals("Køb"))
+		{
+			spiller.fratrækPenge(ejendom.getPris());
+			g.sendBesked(spiller.getNavn() + " har købt " + ejendom.getTitel()
+			+ " for " + ejendom.getPris() + "kr.");
+		}
+		else
+		{
+			// TODO Auktionslogik
+		}
 	}
 }
