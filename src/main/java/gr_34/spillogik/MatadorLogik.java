@@ -43,7 +43,9 @@ public class MatadorLogik {
 			g.sendBesked(navn + "har passeret start feltet, de modtager 200kr");
 			nutidigSpiller.tilføjPenge(200);
 		}
+		// Kan al spillerflytningsinstruks slås sammen ét sted?
 		g.flytSpiller(s.getNutidigSpillerIndex(), gammelPosition, nyPosition);
+		nutidigSpiller.setPosition(nyPosition);
 		
 		AbstraktFelt ramtFelt = b.getFelt(nyPosition);
 		
