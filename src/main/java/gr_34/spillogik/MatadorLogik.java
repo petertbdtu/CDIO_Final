@@ -32,14 +32,15 @@ public class MatadorLogik {
 	}
 	
 	public void UdførSpillerTur() {
+		
 		Spiller nutidigSpiller = s.getNutidigSpiller();
+		String navn = nutidigSpiller.getNavn();
 		
 		//Sørg for at hvis man ryger i fængsel så trigger man ikke start penge.
 		raflebæger.kastTerninger();
 		int slag = raflebæger.getSum();
 		this.g.visTerning( raflebæger.getØjne0(), raflebæger.getØjne1() );
 		
-		String navn = nutidigSpiller.getNavn();
 		
 		int gammelPosition = nutidigSpiller.getPosition();
 		// modulo sørger for at den nye position ikke går udenfor vores mængde af felter.
@@ -48,7 +49,9 @@ public class MatadorLogik {
 		if (nyPosition < gammelPosition) {
 			g.sendBesked(navn + "har passeret start feltet, de modtager 200kr");
 			nutidigSpiller.tilføjPenge(200);
+			g.opdaterAllesPenge();
 		}
+		
 		// Kan al spillerflytningsinstruks slås sammen ét sted?
 		g.flytSpiller(s.getNutidigSpillerIndex(), gammelPosition, nyPosition);
 		nutidigSpiller.setPosition(nyPosition);
