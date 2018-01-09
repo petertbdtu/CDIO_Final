@@ -38,7 +38,7 @@ public class Gade extends AbstraktEjendom {
 		return farve;
 	}
 
-	public int getLeje() {
+	public int getLeje(int antalBygning) {
 		return leje[antalBygning];
 	}
 

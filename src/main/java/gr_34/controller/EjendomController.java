@@ -23,8 +23,6 @@ public class EjendomController {
 
 		AbstraktFelt[] felter = bræt.getFelter();
 
-		// TODO Find ud af om der er en bedre måde at finde alle slags ejendomme.
-
 		int gadeTæller = 0;
 		int rederiTæller = 0;
 		int bryggeriTæller = 0;
@@ -65,11 +63,13 @@ public class EjendomController {
 		}
 		else if (ejendom.getEjer() != spiller)
 		{
-			spiller.fratrækPenge(gadePris);
-			ejendom.getEjer().tilføjPenge(gadePris);
-			g.sendBesked(spiller.getNavn() + "lander på " + ejendom.getTitel() + " som er ejet af "
+			int antalBygninger = ejendom.getAntalBygning();
+			spiller.fratrækPenge(ejendom.getLeje(antalBygninger));
+			ejendom.getEjer().tilføjPenge(ejendom.getLeje(antalBygninger));
+			g.opdaterAllesPenge();
+			g.sendBesked(spiller.getNavn() + " lander på " + ejendom.getTitel() + " som er ejet af "
 					+ ejendom.getEjer().getNavn() + ". " + spiller.getNavn() + " betaler " + ejendom.getEjer().getNavn()
-					+ gadePris + "kr."); 
+					+ " " + ejendom.getLeje(antalBygninger) + "kr."); 
 		}
 		else
 			g.sendBesked(spiller.getNavn() + " er landet på en gade som De selv ejer");
@@ -86,9 +86,10 @@ public class EjendomController {
 		{
 			spiller.fratrækPenge(rederiPris);
 			ejendom.getEjer().tilføjPenge(rederiPris);
-			g.sendBesked(spiller.getNavn() + "lander på " + ejendom.getTitel() + " som er ejet af "
+			g.opdaterAllesPenge();
+			g.sendBesked(spiller.getNavn() + " lander på " + ejendom.getTitel() + " som er ejet af "
 					+ ejendom.getEjer().getNavn() + ". " + spiller.getNavn() + " betaler " + ejendom.getEjer().getNavn()
-					+ rederiPris + "kr."); 
+					+ " " + rederiPris + "kr."); 
 		}
 		else
 			g.sendBesked(spiller.getNavn() + " er landet på en gade som De selv ejer");
@@ -102,12 +103,13 @@ public class EjendomController {
 			ramtUkøbtEjendom(ejendom, spiller);
 		}
 		else if (ejendom.getEjer() != spiller)
-		{
+		{ 
 			spiller.fratrækPenge(bryggeriPris);
 			ejendom.getEjer().tilføjPenge(bryggeriPris);
-			g.sendBesked(spiller.getNavn() + "lander på " + ejendom.getTitel() + " som er ejet af "
+			g.opdaterAllesPenge();
+			g.sendBesked(spiller.getNavn() + " lander på " + ejendom.getTitel() + " som er ejet af "
 					+ ejendom.getEjer().getNavn() + ". " + spiller.getNavn() + " betaler " + ejendom.getEjer().getNavn()
-					+ bryggeriPris + "kr."); 
+					+ " " + bryggeriPris + "kr."); 
 		}
 		else
 			g.sendBesked(spiller.getNavn() + " er landet på en gade som De selv ejer");
@@ -117,12 +119,13 @@ public class EjendomController {
 	{
 		g.sendBesked(spiller.getNavn() + " lander på " + ejendom.getTitel() + " som er til salg.");
 		
-		String valg = g.anmodValgKnap(spiller.getNavn() + ", vil de købe " + ejendom.getTitel() +
+		String valg = g.anmodValgKnap(spiller.getNavn() + ", vil De købe " + ejendom.getTitel() +
 				" til " + ejendom.getPris() + "?", "Køb", "Sæt til auktion");
 		
 		if (valg.equals("Køb"))
 		{
 			spiller.fratrækPenge(ejendom.getPris());
+			ejendom.setEjer(spiller);
 			// TODO Tilføj at ejendommen bliver købt
 			g.opdaterAllesPenge();
 			g.sendBesked(spiller.getNavn() + " har købt " + ejendom.getTitel()
@@ -131,6 +134,21 @@ public class EjendomController {
 		else
 		{
 			// TODO Auktionslogik
+		}
+	}
+	
+	public void købtAlleGader(Gade ejendom, Spiller spiller) {
+		int antalBygninger = ejendom.getAntalBygning();
+		g.sendBesked(spiller.getNavn() + " lander på " + ejendom.getTitel() + " som er til salg.");
+		
+		String valg = g.anmodValgKnap(spiller.getNavn() + ", vil De sætte et hus på Deres grund? Det koster " + ejendom.getBygningPris() + 
+				"Ja", "Nej");
+		if(valg.equals("Ja")) {
+			antalBygninger++;
+			spiller.fratrækPenge(ejendom.getBygningPris());
+			ejendom.setAntalBygning(antalBygninger);
+			g.opdaterAllesPenge();
+			g.sendBesked(spiller.getNavn() + " har købt hus på " + ejendom.getTitel());
 		}
 	}
 }
