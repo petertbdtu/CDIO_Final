@@ -59,50 +59,53 @@ public class EjendomController {
 	private void ramtGade(Gade ejendom, Spiller spiller) {
 		int gadePris = ejendom.getPris();
 		// TODO logik iforhold til antal af ejede gader tjek array hver tur?
-		if (ejendom.getEjer() != spiller) {
+		if (ejendom.getEjer() == null) {
+				ejendom.setEjer(spiller);
+				spiller.fratrækPenge(gadePris);
+				g.sendBesked(spiller.getNavn() + " har købt " + ejendom.getTitel() + " for " + ejendom.getPris() + "kr.");
+		
+		} else if (ejendom.getEjer() != spiller) {
 			spiller.fratrækPenge(gadePris);
 			ejendom.getEjer().tilføjPenge(gadePris);
 			g.sendBesked(spiller.getNavn() + "lander på " + ejendom.getTitel() + " som er ejet af "
 					+ ejendom.getEjer().getNavn() + ". " + spiller.getNavn() + " betaler " + ejendom.getEjer().getNavn()
-					+ gadePris + "kr.");
-		} else if (ejendom.getEjer() == null) {
-			ejendom.setEjer(spiller);
-			spiller.fratrækPenge(gadePris);
-			g.sendBesked(spiller.getNavn() + " har købt " + ejendom.getTitel() + " for " + ejendom.getPris() + "kr.");
+					+ gadePris + "kr."); 
 		} else
 			g.sendBesked(spiller.getNavn() + " er landet på en gade som De selv ejer");
 	}
 
 	private void ramtRederi(Rederi ejendom, Spiller spiller) {
 		int rederiPris = ejendom.getPris();
-		// TODO logik iforhold til antal af ejede rederier tjek array hver tur?
-		if (ejendom.getEjer() != spiller) {
+		// TODO logik iforhold til antal af ejede gader tjek array hver tur?
+		if (ejendom.getEjer() == null) {
+				ejendom.setEjer(spiller);
+				spiller.fratrækPenge(rederiPris);
+				g.sendBesked(spiller.getNavn() + " har købt " + ejendom.getTitel() + " for " + ejendom.getPris() + "kr.");
+		
+		} else if (ejendom.getEjer() != spiller) {
 			spiller.fratrækPenge(rederiPris);
 			ejendom.getEjer().tilføjPenge(rederiPris);
 			g.sendBesked(spiller.getNavn() + "lander på " + ejendom.getTitel() + " som er ejet af "
 					+ ejendom.getEjer().getNavn() + ". " + spiller.getNavn() + " betaler " + ejendom.getEjer().getNavn()
-					+ rederiPris + "kr.");
-		} else if (ejendom.getEjer() == null) {
-			ejendom.setEjer(spiller);
-			spiller.fratrækPenge(rederiPris);
-			g.sendBesked(spiller.getNavn() + " har købt " + ejendom.getTitel() + " for " + ejendom.getPris() + "kr.");
+					+ rederiPris + "kr."); 
 		} else
 			g.sendBesked(spiller.getNavn() + " er landet på en gade som De selv ejer");
 	}
 
 	private void ramtBryggeri(Bryggeri ejendom, Spiller spiller) {
 		int bryggeriPris = ejendom.getPris();
-		// TODO logik iforhold til antal af ejede bryggerier tjek array hver tur?
-		if (ejendom.getEjer() != spiller) {
+		// TODO logik iforhold til antal af ejede gader tjek array hver tur?
+		if (ejendom.getEjer() == null) {
+				ejendom.setEjer(spiller);
+				spiller.fratrækPenge(bryggeriPris);
+				g.sendBesked(spiller.getNavn() + " har købt " + ejendom.getTitel() + " for " + ejendom.getPris() + "kr.");
+		
+		} else if (ejendom.getEjer() != spiller) {
 			spiller.fratrækPenge(bryggeriPris);
 			ejendom.getEjer().tilføjPenge(bryggeriPris);
 			g.sendBesked(spiller.getNavn() + "lander på " + ejendom.getTitel() + " som er ejet af "
 					+ ejendom.getEjer().getNavn() + ". " + spiller.getNavn() + " betaler " + ejendom.getEjer().getNavn()
-					+ bryggeriPris + "kr.");
-		} else if (ejendom.getEjer() == null) {
-			ejendom.setEjer(spiller);
-			spiller.fratrækPenge(bryggeriPris);
-			g.sendBesked(spiller.getNavn() + " har købt " + ejendom.getTitel() + " for " + ejendom.getPris() + "kr.");
+					+ bryggeriPris + "kr."); 
 		} else
 			g.sendBesked(spiller.getNavn() + " er landet på en gade som De selv ejer");
 	}
