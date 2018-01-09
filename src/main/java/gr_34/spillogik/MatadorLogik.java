@@ -29,7 +29,9 @@ public class MatadorLogik {
 		this.g = g;
 	}
 	
-	public void UdførSpillerTur(Raflebæger raflebæger, Spiller nutidigSpiller) {
+	public void UdførSpillerTur(Raflebæger raflebæger) {
+		Spiller nutidigSpiller = s.getNutidigSpiller();
+		
 		//Sørg for at hvis man ryger i fængsel så trigger man ikke start penge.
 		raflebæger.kastTerninger();
 		int slag = raflebæger.getSum(); 
