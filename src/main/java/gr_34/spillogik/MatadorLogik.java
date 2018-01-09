@@ -20,6 +20,7 @@ public class MatadorLogik {
 	private BrætController b;
 	private EjendomController e;
 	private GUIBoundary g;
+	private Raflebæger raflebæger;
 	private boolean vundet = false;
 	
 	public MatadorLogik(SpillerController s, BrætController b, EjendomController e, GUIBoundary g) {
@@ -27,14 +28,17 @@ public class MatadorLogik {
 		this.b = b;
 		this.e = e;
 		this.g = g;
+		this.raflebæger = new Raflebæger();
 	}
 	
-	public void UdførSpillerTur(Raflebæger raflebæger) {
+	public void UdførSpillerTur() {
 		Spiller nutidigSpiller = s.getNutidigSpiller();
 		
 		//Sørg for at hvis man ryger i fængsel så trigger man ikke start penge.
 		raflebæger.kastTerninger();
-		int slag = raflebæger.getSum(); 
+		int slag = raflebæger.getSum();
+		this.g.visTerning( raflebæger.getØjne0(), raflebæger.getØjne1() );
+		
 		String navn = nutidigSpiller.getNavn();
 		
 		int gammelPosition = nutidigSpiller.getPosition();

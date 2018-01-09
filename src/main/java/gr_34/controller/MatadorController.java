@@ -54,9 +54,8 @@ public class MatadorController {
 		MatadorLogik matador = new MatadorLogik(sc, bræt, e, guiB);
 		
 		do 
-		{	
-			guiB.visTerning(raflebæger.getØjne0(), raflebæger.getØjne1());
-			matador.UdførSpillerTur(raflebæger);
+		{
+			matador.UdførSpillerTur();
 			sc.gåTilNæsteSpiller();
 		} while (!matador.isVundet());
 		
