@@ -1,6 +1,7 @@
 package gr_34.controller;
 
 import gr_34.boundary.GUIBoundary;
+import gr_34.spillogik.MatadorLogik;
 
 public class MatadorController {
 	// DiceCup diceCup;
@@ -37,6 +38,7 @@ public class MatadorController {
 
 	public void playGame()
 	{
+		Raflebæger raflebæger = new Raflebæger();
 		
 		BrætController bræt = new BrætController();
 		
@@ -47,12 +49,14 @@ public class MatadorController {
 
 		guiB.indlæsSpillere(sc.getSpillere());
 		
-//		MatadorLogik matador = new MatadorLogik( alle controllere? )
-//		
-//		while (!matador.erVundet())
-//		{
-//			matador.udførTur();
-//		}
+		MatadorLogik matador = new MatadorLogik();
+		
+		do 
+		{	
+			guiB.visTerning(raflebæger.getØjne0(), raflebæger.getØjne1());
+			matador.UdførSpillerTur(raflebæger, sc.getNutidigSpiller());
+			
+		} while (!matador.isVundet());
 		
 		
 	}

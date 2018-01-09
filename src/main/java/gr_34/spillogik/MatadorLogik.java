@@ -9,13 +9,10 @@ import gr_34.entity.Spiller;
 import gr_34.entity.felter.AbstraktEjendom;
 import gr_34.entity.felter.AbstraktFelt;
 import gr_34.entity.felter.BetalSkatFelt;
-import gr_34.entity.felter.Bryggeri;
 import gr_34.entity.felter.ChanceFelt;
 import gr_34.entity.felter.Fængsel;
-import gr_34.entity.felter.Gade;
 import gr_34.entity.felter.GåIFængsel;
 import gr_34.entity.felter.Parkering;
-import gr_34.entity.felter.Rederi;
 import gr_34.entity.felter.StartFelt;
 
 public class MatadorLogik {
@@ -23,9 +20,11 @@ public class MatadorLogik {
 	private BrætController b;
 	private EjendomController e;
 	private GUIBoundary g;
+	private boolean vundet = false;
 	
 	public void UdførSpillerTur(Raflebæger raflebæger, Spiller nutidigSpiller) {
 		//Sørg for at hvis man ryger i fængsel så trigger man ikke start penge.
+		raflebæger.kastTerninger();
 		int slag = raflebæger.getSum(); 
 		String navn = nutidigSpiller.getNavn();
 		
@@ -68,6 +67,13 @@ public class MatadorLogik {
 		else if (ramtFelt instanceof Parkering)
 		{
 		}
-		
+	}
+
+	public boolean isVundet() {
+		return vundet;
+	}
+
+	public void setVundet(boolean vundet) {
+		this.vundet = vundet;
 	}
 }

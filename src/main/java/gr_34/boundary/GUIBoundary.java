@@ -135,4 +135,8 @@ public class GUIBoundary {
 		this.fields[gammelPos].setCar(players[spillerIndex], false);
 		this.fields[nyPos].setCar(players[spillerIndex], true);
 	}
+	
+	public void visTerning(int øjneVærdi0, int øjneVærdi1) {
+		gui.setDice(øjneVærdi0, øjneVærdi1);
+	}
 }
