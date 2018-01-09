@@ -1,6 +1,8 @@
 package gr_34.boundary;
 
 import gr_34.entity.felter.*;
+import gr_34.controller.BrætController;
+import gr_34.controller.SpillerController;
 import gr_34.entity.Spiller;
 import gui_fields.GUI_Brewery;
 import gui_fields.GUI_Chance;
@@ -19,10 +21,14 @@ public class GUIBoundary {
 	GUI gui;
 	GUI_Field[] fields;
 	GUI_Player[] players;
+	SpillerController sc;
+	BrætController bc;
 	
-	public GUIBoundary(AbstraktFelt[] felter)
+	public GUIBoundary(BrætController bc)
 	{
-		indlæsFelter(felter);
+		this.bc = bc;
+		
+		indlæsFelter(bc.getFelter());
 		this.gui = new GUI(fields);
 	}
 
@@ -114,11 +120,14 @@ public class GUIBoundary {
 	}
 
 	/**
-	 * Tilføjer spillere til brættet. Rækkefølgen af arrayet er relevant i andre metoder.
+	 * Tilføjer spillere til brættet.
 	 * @param spillere
 	 */
-	public void indlæsSpillere(Spiller[] spillere)
+	public void indlæsSpillere(SpillerController sc)
 	{
+		this.sc = sc;
+		Spiller[] spillere = this.sc.getSpillere();
+		
 		players = new GUI_Player[spillere.length];
 		
 		for (int i = 0; i < spillere.length; i++)
@@ -126,6 +135,20 @@ public class GUIBoundary {
 			Spiller spiller = spillere[i];
 			players[i] = new GUI_Player(spiller.getNavn(), spiller.getPenge());
 			gui.addPlayer(players[i]);
+			fields[spillere[i].getPosition()].setCar(players[i], true);
+		}
+	}
+	
+	/**
+	 * indlæsSpillere først
+	 */
+	public void opdaterAllesPenge()
+	{
+		Spiller[] spillere = sc.getSpillere();
+		
+		for (int i = 0; i < spillere.length; i++)
+		{
+			players[i].setBalance(spillere[i].getPenge());
 		}
 	}
 	

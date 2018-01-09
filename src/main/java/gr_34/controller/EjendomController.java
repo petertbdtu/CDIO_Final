@@ -123,6 +123,8 @@ public class EjendomController {
 		if (valg.equals("Køb"))
 		{
 			spiller.fratrækPenge(ejendom.getPris());
+			// TODO Tilføj at ejendommen bliver købt
+			g.opdaterAllesPenge();
 			g.sendBesked(spiller.getNavn() + " har købt " + ejendom.getTitel()
 			+ " for " + ejendom.getPris() + "kr.");
 		}
