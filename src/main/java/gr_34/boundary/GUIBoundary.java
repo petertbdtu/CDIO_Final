@@ -104,6 +104,11 @@ public class GUIBoundary {
 		return gui.getUserString(msg);
 	}
 	
+	public String anmodValgKnap(String msg, String ... buttons)
+	{
+		return gui.getUserButtonPressed(msg, buttons);
+	}
+	
 	public void sendBesked(String msg) {
 		gui.showMessage(msg);
 	}
