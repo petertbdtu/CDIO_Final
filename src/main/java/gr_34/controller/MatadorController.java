@@ -44,12 +44,14 @@ public class MatadorController {
 		
 		GUIBoundary guiB = new GUIBoundary(bræt.getFelter());
 		
+		EjendomController e = new EjendomController(guiB, bræt);
+		
 		SpillerController sc = new SpillerController(guiB);
 		sc.opretSpillere(1500);
 
 		guiB.indlæsSpillere(sc.getSpillere());
 		
-		MatadorLogik matador = new MatadorLogik();
+		MatadorLogik matador = new MatadorLogik(sc, bræt, e, guiB);
 		
 		do 
 		{	

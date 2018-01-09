@@ -22,6 +22,13 @@ public class MatadorLogik {
 	private GUIBoundary g;
 	private boolean vundet = false;
 	
+	public MatadorLogik(SpillerController s, BrætController b, EjendomController e, GUIBoundary g) {
+		this.s = s;
+		this.b = b;
+		this.e = e;
+		this.g = g;
+	}
+	
 	public void UdførSpillerTur(Raflebæger raflebæger, Spiller nutidigSpiller) {
 		//Sørg for at hvis man ryger i fængsel så trigger man ikke start penge.
 		raflebæger.kastTerninger();
