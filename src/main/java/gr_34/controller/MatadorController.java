@@ -57,7 +57,7 @@ public class MatadorController {
 		{	
 			guiB.visTerning(raflebæger.getØjne0(), raflebæger.getØjne1());
 			matador.UdførSpillerTur(raflebæger, sc.getNutidigSpiller());
-			
+			sc.gåTilNæsteSpiller();
 		} while (!matador.isVundet());
 		
 		
