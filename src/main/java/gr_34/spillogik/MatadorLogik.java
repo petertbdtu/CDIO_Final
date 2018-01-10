@@ -68,6 +68,8 @@ public class MatadorLogik {
 		else if (ramtFelt instanceof ChanceFelt)
 		{
 			//TODO Chance logik
+			g.sendBesked(nutidigSpiller.getNavn() + " skal trække et chancekort. IKKE IMPLEMENTERET");
+
 		}
 		else if (ramtFelt instanceof StartFelt)
 		{
@@ -80,10 +82,12 @@ public class MatadorLogik {
 		else if (ramtFelt instanceof GåIFængsel)
 		{
 			//TODO GåIFængsel Logik
+			g.sendBesked(nutidigSpiller.getNavn() + " går direkte i fængsel. IKKE IMPLEMENTERET");
 		}
 		else if (ramtFelt instanceof BetalSkatFelt)
 		{
 			//TODO BetalSkatFelt Logik
+			g.sendBesked(nutidigSpiller.getNavn() + " skal betale skat. IKKE IMPLEMENTERET");
 		}
 		else if (ramtFelt instanceof Parkering)
 		{
