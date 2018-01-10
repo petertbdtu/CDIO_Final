@@ -45,6 +45,8 @@ public class MatadorLogik {
 		int gammelPosition = nutidigSpiller.getPosition();
 		// modulo sørger for at den nye position ikke går udenfor vores mængde af felter.
 		int nyPosition = (gammelPosition + slag) % b.getFelter().length;
+		
+		// giver penge for at passere start.
 		// et normal slag bør ikke tillade en til at rykke baglens.
 		if (nyPosition < gammelPosition) {
 			g.sendBesked(navn + "har passeret start feltet, de modtager 200kr");
@@ -68,11 +70,11 @@ public class MatadorLogik {
 		}
 		else if (ramtFelt instanceof StartFelt)
 		{
-			//TODO StartFelt Logik
+			g.sendBesked(nutidigSpiller.getNavn() + " er kommet tilbage start.");
 		}
 		else if (ramtFelt instanceof Fængsel)
 		{
-			//TODO Fængsel Logik
+			g.sendBesked(nutidigSpiller.getNavn() + " er på besøg i fængslet.");
 		}
 		else if (ramtFelt instanceof GåIFængsel)
 		{
@@ -80,10 +82,11 @@ public class MatadorLogik {
 		}
 		else if (ramtFelt instanceof BetalSkatFelt)
 		{
-	
+			//TODO BetalSkatFelt Logik
 		}
 		else if (ramtFelt instanceof Parkering)
 		{
+			g.sendBesked(nutidigSpiller.getNavn() + " parkerer gratis.");
 		}
 	}
 
