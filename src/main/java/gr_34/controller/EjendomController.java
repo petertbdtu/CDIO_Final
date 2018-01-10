@@ -45,7 +45,10 @@ public class EjendomController {
 	}
 
 	public void ramtEjendom(AbstraktEjendom ejendom, Spiller spiller) {
-		if (ejendom instanceof Gade)
+		if (ejendom.getEjer() == null)
+			ramtUkøbtEjendom(ejendom ,spiller);
+		
+		else if (ejendom instanceof Gade)
 			ramtGade((Gade) ejendom, spiller);
 
 		else if (ejendom instanceof Rederi)
@@ -55,13 +58,9 @@ public class EjendomController {
 			ramtBryggeri((Bryggeri) ejendom, spiller);
 
 	}
-
+	
 	private void ramtGade(Gade ejendom, Spiller spiller) {
-		if (ejendom.getEjer() == null)
-		{
-			ramtUkøbtEjendom(ejendom, spiller);
-		}
-		else if (ejendom.getEjer() != spiller)
+		if (ejendom.getEjer() != spiller)
 		{
 			// TODO logik iforhold til antal af ejede gader
 			int antalBygninger = ejendom.getAntalBygning();
@@ -77,11 +76,7 @@ public class EjendomController {
 	}
 
 	private void ramtRederi(Rederi ejendom, Spiller spiller) {
-		if (ejendom.getEjer() == null)
-		{
-			ramtUkøbtEjendom(ejendom, spiller);
-		}
-		else if (ejendom.getEjer() != spiller)
+		if (ejendom.getEjer() != spiller)
 		{
 			betalLejeRederi(ejendom, spiller);
 		}
@@ -90,12 +85,7 @@ public class EjendomController {
 	}
 
 	private void ramtBryggeri(Bryggeri ejendom, Spiller spiller) {
-
-		if (ejendom.getEjer() == null)
-		{
-			ramtUkøbtEjendom(ejendom, spiller);
-		}
-		else if (ejendom.getEjer() != spiller)
+		if (ejendom.getEjer() != spiller)
 		{ 
 			betalLejeBryggeri(ejendom, spiller);
 		}
@@ -114,7 +104,7 @@ public class EjendomController {
 		{
 			spiller.fratrækPenge(ejendom.getPris());
 			ejendom.setEjer(spiller);
-			// TODO Tilføj at ejendommen bliver købt
+			// TODO Sæt ejer grafisk (ejer og farve osv.)
 			g.opdaterAllesPenge();
 			g.sendBesked(spiller.getNavn() + " har købt " + ejendom.getTitel()
 			+ " for " + ejendom.getPris() + "kr.");
