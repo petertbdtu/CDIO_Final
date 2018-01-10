@@ -38,8 +38,6 @@ public class MatadorController {
 
 	public void playGame()
 	{
-		Raflebæger raflebæger = new Raflebæger();
-		
 		BrætController bræt = new BrætController();
 		
 		GUIBoundary guiB = new GUIBoundary(bræt);
