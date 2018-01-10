@@ -11,6 +11,7 @@ import gr_34.entity.felter.Rederi;
 public class EjendomController {
 
 	private GUIBoundary g;
+	private Raflebæger raflebæger;
 	private final int ANTAL_GADER = 22;
 	private final int ANTAL_BRYGGERIER = 2;
 	private final int ANTAL_REDERIER = 4;
@@ -18,8 +19,9 @@ public class EjendomController {
 	private Bryggeri[] bryggerier = new Bryggeri[ANTAL_BRYGGERIER];
 	private Rederi[] rederier = new Rederi[ANTAL_REDERIER];
 
-	public EjendomController(GUIBoundary gui, BrætController bræt) {
+	public EjendomController(GUIBoundary gui, BrætController bræt, Raflebæger raflebæger) {
 		this.g = gui;
+		this.raflebæger = raflebæger;
 
 		AbstraktFelt[] felter = bræt.getFelter();
 
@@ -55,14 +57,13 @@ public class EjendomController {
 	}
 
 	private void ramtGade(Gade ejendom, Spiller spiller) {
-		int gadePris = ejendom.getPris();
-		// TODO logik iforhold til antal af ejede gader tjek array hver tur?
 		if (ejendom.getEjer() == null)
 		{
 			ramtUkøbtEjendom(ejendom, spiller);
 		}
 		else if (ejendom.getEjer() != spiller)
 		{
+			// TODO logik iforhold til antal af ejede gader
 			int antalBygninger = ejendom.getAntalBygning();
 			spiller.fratrækPenge(ejendom.getLeje(antalBygninger));
 			ejendom.getEjer().tilføjPenge(ejendom.getLeje(antalBygninger));
@@ -76,40 +77,27 @@ public class EjendomController {
 	}
 
 	private void ramtRederi(Rederi ejendom, Spiller spiller) {
-		int rederiPris = ejendom.getPris();
-		// TODO logik iforhold til antal af ejede gader tjek array hver tur?
 		if (ejendom.getEjer() == null)
 		{
 			ramtUkøbtEjendom(ejendom, spiller);
 		}
 		else if (ejendom.getEjer() != spiller)
 		{
-			spiller.fratrækPenge(rederiPris);
-			ejendom.getEjer().tilføjPenge(rederiPris);
-			g.opdaterAllesPenge();
-			g.sendBesked(spiller.getNavn() + " lander på " + ejendom.getTitel() + " som er ejet af "
-					+ ejendom.getEjer().getNavn() + ". " + spiller.getNavn() + " betaler " + ejendom.getEjer().getNavn()
-					+ " " + rederiPris + "kr."); 
+			betalLejeRederi(ejendom, spiller);
 		}
 		else
 			g.sendBesked(spiller.getNavn() + " er landet på en gade som De selv ejer");
 	}
 
 	private void ramtBryggeri(Bryggeri ejendom, Spiller spiller) {
-		int bryggeriPris = ejendom.getPris();
-		// TODO logik iforhold til antal af ejede gader tjek array hver tur?
+
 		if (ejendom.getEjer() == null)
 		{
 			ramtUkøbtEjendom(ejendom, spiller);
 		}
 		else if (ejendom.getEjer() != spiller)
 		{ 
-			spiller.fratrækPenge(bryggeriPris);
-			ejendom.getEjer().tilføjPenge(bryggeriPris);
-			g.opdaterAllesPenge();
-			g.sendBesked(spiller.getNavn() + " lander på " + ejendom.getTitel() + " som er ejet af "
-					+ ejendom.getEjer().getNavn() + ". " + spiller.getNavn() + " betaler " + ejendom.getEjer().getNavn()
-					+ " " + bryggeriPris + "kr."); 
+			betalLejeBryggeri(ejendom, spiller);
 		}
 		else
 			g.sendBesked(spiller.getNavn() + " er landet på en gade som De selv ejer");
@@ -157,12 +145,12 @@ public class EjendomController {
 		int ejersAntalRederier = 0;
 		for (int i = 0; i < ANTAL_REDERIER; i++)
 		{
-			if ( rederier[i].getEjer().equals( ejendom.getEjer() ) )
+			if ( rederier[i].getEjer() == ejendom.getEjer() )
 				ejersAntalRederier++;
 		}
-		int leje = 25;
 		
-		for (int i = 0; i < ejersAntalRederier; i++)
+		int leje = 25;
+		for (int i = 1; i < ejersAntalRederier; i++)
 		{
 			leje *= 2;
 		}
@@ -170,17 +158,33 @@ public class EjendomController {
 		spiller.fratrækPenge(leje);
 		ejendom.getEjer().tilføjPenge(leje);
 		
+		g.sendBesked(spiller.getNavn() + " lander på " + ejendom.getTitel() + " som er ejet af "
+				+ ejendom.getEjer().getNavn() + ". " + spiller.getNavn() + " betaler " + ejendom.getEjer().getNavn()
+				+ " " + leje + "kr."); 
+		
 		g.opdaterAllesPenge();
 	}
 	
 	public void betalLejeBryggeri(Bryggeri ejendom, Spiller spiller)
 	{
-		int leje
-		if
+		raflebæger.kastTerninger();
+		int leje = raflebæger.getSum();
+		g.visTerning(raflebæger.getØjne0(), raflebæger.getØjne1());
 		
+		// Tjekker om begge rederier ejes af samme spiller.
+		// Et af bryggerierne er 'ejendom' men det eneste der er relevant er om
+		// begge har samme ejer
+		if (bryggerier[0].getEjer() == bryggerier[1].getEjer())
+			leje *= 10;
+		else
+			leje *= 4;
 		
 		spiller.fratrækPenge(leje);
 		ejendom.getEjer().tilføjPenge(leje);
+		
+		g.sendBesked(spiller.getNavn() + " lander på " + ejendom.getTitel() + " som er ejet af "
+				+ ejendom.getEjer().getNavn() + ". " + spiller.getNavn() + " betaler " + ejendom.getEjer().getNavn()
+				+ " " + leje + "kr.");
 		
 		g.opdaterAllesPenge();
 	}
