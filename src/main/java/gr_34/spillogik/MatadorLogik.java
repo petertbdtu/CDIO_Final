@@ -23,12 +23,13 @@ public class MatadorLogik {
 	private Raflebæger raflebæger;
 	private boolean vundet = false;
 	
-	public MatadorLogik(SpillerController s, BrætController b, EjendomController e, GUIBoundary g) {
+	public MatadorLogik(SpillerController s, BrætController b, EjendomController e,
+			GUIBoundary g, Raflebæger raflebæger) {
 		this.s = s;
 		this.b = b;
 		this.e = e;
 		this.g = g;
-		this.raflebæger = new Raflebæger();
+		this.raflebæger = raflebæger;
 	}
 	
 	public void UdførSpillerTur() {

@@ -151,4 +151,37 @@ public class EjendomController {
 			g.sendBesked(spiller.getNavn() + " har købt hus på " + ejendom.getTitel());
 		}
 	}
+	
+	public void betalLejeRederi(Rederi ejendom, Spiller spiller)
+	{
+		int ejersAntalRederier = 0;
+		for (int i = 0; i < ANTAL_REDERIER; i++)
+		{
+			if ( rederier[i].getEjer().equals( ejendom.getEjer() ) )
+				ejersAntalRederier++;
+		}
+		int leje = 25;
+		
+		for (int i = 0; i < ejersAntalRederier; i++)
+		{
+			leje *= 2;
+		}
+		
+		spiller.fratrækPenge(leje);
+		ejendom.getEjer().tilføjPenge(leje);
+		
+		g.opdaterAllesPenge();
+	}
+	
+	public void betalLejeBryggeri(Bryggeri ejendom, Spiller spiller)
+	{
+		int leje
+		if
+		
+		
+		spiller.fratrækPenge(leje);
+		ejendom.getEjer().tilføjPenge(leje);
+		
+		g.opdaterAllesPenge();
+	}
 }

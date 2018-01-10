@@ -38,18 +38,20 @@ public class MatadorController {
 
 	public void playGame()
 	{
+		Raflebæger raflebæger = new Raflebæger();
+		
 		BrætController bræt = new BrætController();
 		
 		GUIBoundary guiB = new GUIBoundary(bræt);
 		
-		EjendomController e = new EjendomController(guiB, bræt);
+		EjendomController e = new EjendomController(guiB, bræt, raflebæger);
 		
 		SpillerController sc = new SpillerController(guiB);
 		sc.opretSpillere(1500);
 
 		guiB.indlæsSpillere(sc);
 		
-		MatadorLogik matador = new MatadorLogik(sc, bræt, e, guiB);
+		MatadorLogik matador = new MatadorLogik(sc, bræt, e, guiB, raflebæger);
 		
 		do 
 		{
