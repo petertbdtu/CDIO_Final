@@ -139,7 +139,7 @@ public class MatadorLogik {
 	}
 
 	public boolean isVundet() {
-		return vundet;
+		return s.harVinder();
 	}
 
 	public void setVundet(boolean vundet) {

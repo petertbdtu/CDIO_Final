@@ -38,6 +38,8 @@ public class SpillerController {
 	public void gåTilNæsteSpiller()
 	{
 		nutidigSpillerIndex = (nutidigSpillerIndex+1) % antalSpillere;
+		if (spillere[nutidigSpillerIndex].erFallit())
+				gåTilNæsteSpiller();
 	}
 	
 	public Spiller getNutidigSpiller() 
@@ -48,6 +50,31 @@ public class SpillerController {
 	public int getNutidigSpillerIndex()
 	{
 		return nutidigSpillerIndex;
-	}	
+	}
+	
+	/**
+	 * Returnerer true hvis der kun er en (eller nul) spillere der ikke er fallit.
+	 * @return 
+	 */
+	public Boolean harVinder()
+	{
+		int antalIkkeFallit = 0;
+		for (Spiller s : spillere)
+			if ( !s.erFallit() ) antalIkkeFallit++;
+		if (antalIkkeFallit <= 1)
+			return true;
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @return første ikke-fallitte spiller. Null hvis der ikke er nogen ikke-fallitte.
+	 */
+	public Spiller getVinder()
+	{
+		for (Spiller s : spillere)
+			if ( !s.erFallit() ) return s;
+		return null;
+	}
 	
 }

@@ -10,7 +10,7 @@ public class MatadorController {
 
 	public void playGame()
 	{
-		Raflebæger raflebæger = new RaflebægerTestStubHusKøb();
+		Raflebæger raflebæger = new RaflebægerTestStubTaber();
 		
 		BrætController bræt = new BrætController();
 		
@@ -31,6 +31,7 @@ public class MatadorController {
 			sc.gåTilNæsteSpiller();
 		} while (!matador.isVundet());
 		
+		guiB.sendBesked(sc.getVinder().getNavn() + " har vundet!");
 		
 	}
 

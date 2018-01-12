@@ -4,10 +4,12 @@ public class Spiller {
 	private String navn;
 	private Konto konto;
 	private int position;
+	private Boolean fallit;
 	
 	public Spiller(String navn, int startBalance) {
 		this.konto = new Konto(startBalance);
 		this.navn = navn;
+		fallit = false;
 	}
 	
 	public String getNavn()
@@ -39,8 +41,13 @@ public class Spiller {
 		sum = konto.getPenge()-beløb;
 		if (sum < 0) {
 			konto.setPenge(0);
+			fallit = true;
 		} else
 			konto.setPenge(sum);
 	}
 	
+	public boolean erFallit()
+	{
+		return fallit;
+	}
 }
