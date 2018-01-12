@@ -104,14 +104,26 @@ public class MatadorLogik {
 				nutidigSpiller.fratrækPenge(betalPris);
 				g.opdaterAllesPenge();
 			}
-			
-				
+
 		}
 		else if (ramtFelt instanceof Parkering)
 		{
 			g.sendBesked(nutidigSpiller.getNavn() + " parkerer gratis.");
 		}
 		
+		Boolean husMulighedGenerelt = false;
+		Boolean[] husMuligheder = e.fuldstændigtEjedeGrunde(nutidigSpiller);
+		for (int i = 0; i < husMuligheder.length; i++)
+		{
+			System.out.println(husMuligheder[i]);
+			if (husMuligheder[i]) husMulighedGenerelt = true;
+		}
+		
+		if (husMulighedGenerelt)
+		{
+			// TODO Huskøbslogik
+			g.anmodValgKnap("Vil du købe et hus?", "Ja", "Nej");
+		}
 	}
 
 	public boolean isVundet() {

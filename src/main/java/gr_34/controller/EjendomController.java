@@ -120,62 +120,108 @@ public class EjendomController {
 	 * @param spiller
 	 * @return grundeStatus array af booleans for hver grund. Samme rækkefølge som spillepladen.
 	 */
-	public Boolean[][] fuldstændigtEjedeGrunde(Spiller spiller) {
-		Boolean[][] grundeStatus = new Boolean[8][];
+	public Boolean[] fuldstændigtEjedeGrunde(Spiller spiller) {
+		Boolean[] grundeStatus = new Boolean[22];
+		for (int i = 0; i < 22; i++)
+		{
+			grundeStatus[i] = false;
+		}
+		int i = 0;
+		
 		// Lysegrå
 		if (gader[0].getEjer() == spiller
 				&& gader[1].getEjer() == spiller )
 		{
-			grundeStatus[0] = harPladsTilHuse(getSætAfGrunde(0));
+			for (Boolean b : harPladsTilHuse(getSætAfGrunde(0)) )
+				{
+					grundeStatus[i] = b;
+					i++;
+				}
 		}
+		else i += 2;
 		// Røde
 		if (gader[2].getEjer() == spiller
 				&& gader[3].getEjer() == spiller
 				&& gader[4].getEjer() == spiller )
 		{
-			grundeStatus[1] = harPladsTilHuse(getSætAfGrunde(1));
+			for (Boolean b : harPladsTilHuse(getSætAfGrunde(1)) )
+			{
+				grundeStatus[i] = b;
+				i++;
+			}
 		}
+		else i += 3;
 		// Grønne
 		if (gader[5].getEjer() == spiller
 				&& gader[6].getEjer() == spiller
 				&& gader[7].getEjer() == spiller )
 		{
-			grundeStatus[2] = harPladsTilHuse(getSætAfGrunde(2));
+			for (Boolean b : harPladsTilHuse(getSætAfGrunde(2)) )
+			{
+				grundeStatus[i] = b;
+				i++;
+			}
 		}
+		else i += 3;
 		// Mørkegrå
 		if (gader[8].getEjer() == spiller
 				&& gader[9].getEjer() == spiller
 				&& gader[10].getEjer() == spiller )
 		{
-			grundeStatus[3] = harPladsTilHuse(getSætAfGrunde(3));
+			for (Boolean b : harPladsTilHuse(getSætAfGrunde(3)) )
+			{
+				grundeStatus[i] = b;
+				i++;
+			}
 		}
+		else i += 3;
 		// Orange
 		if (gader[11].getEjer() == spiller
 				&& gader[12].getEjer() == spiller
 				&& gader[13].getEjer() == spiller )
 		{
-			grundeStatus[4] = harPladsTilHuse(getSætAfGrunde(4));
+			for (Boolean b : harPladsTilHuse(getSætAfGrunde(4)) )
+			{
+				grundeStatus[i] = b;
+				i++;
+			}
 		}
+		else i += 3;
 		// Hvide
 		if (gader[14].getEjer() == spiller
 				&& gader[15].getEjer() == spiller
 				&& gader[16].getEjer() == spiller )
 		{
-			grundeStatus[5] = harPladsTilHuse(getSætAfGrunde(5));
+			for (Boolean b : harPladsTilHuse(getSætAfGrunde(5)) )
+			{
+				grundeStatus[i] = b;
+				i++;
+			}
 		}
+		else i += 3;
 		// Gule
 		if (gader[17].getEjer() == spiller
 				&& gader[18].getEjer() == spiller
 				&& gader[19].getEjer() == spiller )
 		{
-			grundeStatus[6] = harPladsTilHuse(getSætAfGrunde(6));
+			for (Boolean b : harPladsTilHuse(getSætAfGrunde(6)) )
+			{
+				grundeStatus[i] = b;
+				i++;
+			}
 		}
+		else i += 3;
 		// Brune
 		if (gader[20].getEjer() == spiller
 				&& gader[21].getEjer() == spiller )
 		{
-			grundeStatus[7] = harPladsTilHuse(getSætAfGrunde(7));
+			for (Boolean b : harPladsTilHuse(getSætAfGrunde(7)) )
+			{
+				grundeStatus[i] = b;
+				i++;
+			}
 		}
+		else i += 2;
 		return grundeStatus;
 	}
 	

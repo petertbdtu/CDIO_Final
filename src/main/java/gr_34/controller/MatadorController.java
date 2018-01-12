@@ -10,7 +10,7 @@ public class MatadorController {
 
 	public void playGame()
 	{
-		Raflebæger raflebæger = new RaflebægerTestStub();
+		Raflebæger raflebæger = new RaflebægerTestStubHusKøb();
 		
 		BrætController bræt = new BrætController();
 		
