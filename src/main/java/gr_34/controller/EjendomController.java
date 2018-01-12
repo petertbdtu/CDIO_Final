@@ -115,22 +115,109 @@ public class EjendomController {
 		}
 	}
 	
-	public void købtAlleGader(Gade ejendom, Spiller spiller) {
-		int antalBygninger = ejendom.getAntalBygning();
-		g.sendBesked(spiller.getNavn() + " lander på " + ejendom.getTitel() + " som er til salg.");
-		
-		String valg = g.anmodValgKnap(spiller.getNavn() + ", vil De sætte et hus på Deres grund? Det koster " + ejendom.getBygningPris() + 
-				"Ja", "Nej");
-		if(valg.equals("Ja")) {
-			antalBygninger++;
-			spiller.fratrækPenge(ejendom.getBygningPris());
-			ejendom.setAntalBygning(antalBygninger);
-			g.opdaterAllesPenge();
-			g.sendBesked(spiller.getNavn() + " har købt hus på " + ejendom.getTitel());
+	/**
+	 * Undersøger om spilleren ejer sæt af grunde.
+	 * @param spiller
+	 * @return grundeStatus array af booleans for hver grund. Samme rækkefølge som spillepladen.
+	 */
+	public Boolean[][] fuldstændigtEjedeGrunde(Spiller spiller) {
+		Boolean[][] grundeStatus = new Boolean[8][];
+		// Lysegrå
+		if (gader[0].getEjer() == spiller
+				&& gader[1].getEjer() == spiller )
+		{
+			grundeStatus[0] = harPladsTilHuse(getSætAfGrunde(0));
+		}
+		// Røde
+		if (gader[2].getEjer() == spiller
+				&& gader[3].getEjer() == spiller
+				&& gader[4].getEjer() == spiller )
+		{
+			grundeStatus[1] = harPladsTilHuse(getSætAfGrunde(1));
+		}
+		// Grønne
+		if (gader[5].getEjer() == spiller
+				&& gader[6].getEjer() == spiller
+				&& gader[7].getEjer() == spiller )
+		{
+			grundeStatus[2] = harPladsTilHuse(getSætAfGrunde(2));
+		}
+		// Mørkegrå
+		if (gader[8].getEjer() == spiller
+				&& gader[9].getEjer() == spiller
+				&& gader[10].getEjer() == spiller )
+		{
+			grundeStatus[3] = harPladsTilHuse(getSætAfGrunde(3));
+		}
+		// Orange
+		if (gader[11].getEjer() == spiller
+				&& gader[12].getEjer() == spiller
+				&& gader[13].getEjer() == spiller )
+		{
+			grundeStatus[4] = harPladsTilHuse(getSætAfGrunde(4));
+		}
+		// Hvide
+		if (gader[14].getEjer() == spiller
+				&& gader[15].getEjer() == spiller
+				&& gader[16].getEjer() == spiller )
+		{
+			grundeStatus[5] = harPladsTilHuse(getSætAfGrunde(5));
+		}
+		// Gule
+		if (gader[17].getEjer() == spiller
+				&& gader[18].getEjer() == spiller
+				&& gader[19].getEjer() == spiller )
+		{
+			grundeStatus[6] = harPladsTilHuse(getSætAfGrunde(6));
+		}
+		// Brune
+		if (gader[20].getEjer() == spiller
+				&& gader[21].getEjer() == spiller )
+		{
+			grundeStatus[7] = harPladsTilHuse(getSætAfGrunde(7));
+		}
+		return grundeStatus;
+	}
+	
+	/**
+	 * Finder ud hvilke grunde der kan bygges huse på.
+	 * @param sætAfGrunde grunde med samme farve.
+	 * @return
+	 */
+	private Boolean[] harPladsTilHuse(Gade ... sætAfGrunde)
+	{
+		Boolean[] harPlads = new Boolean[sætAfGrunde.length];
+		int minimumHuse = sætAfGrunde[0].getAntalBygning();
+		for (int i = 1; i < sætAfGrunde.length; i++)
+		{
+			if ( minimumHuse > sætAfGrunde[i].getAntalBygning() )
+				minimumHuse = sætAfGrunde[i].getAntalBygning();
+		}
+		for (int i = 0; i < sætAfGrunde.length; i++)
+		{
+			if (sætAfGrunde[i].getAntalBygning() >= minimumHuse)
+				harPlads[i] = true;
+		}
+		return harPlads;
+	}
+	
+	public Gade[] getSætAfGrunde(int indeks)
+	{
+		switch (indeks)
+		{
+		case 0: return new Gade[] {gader[0], gader[1]};
+		case 1: return new Gade[] {gader[2], gader[3], gader[4]};
+		case 2: return new Gade[] {gader[5], gader[6], gader[7]};
+		case 3: return new Gade[] {gader[8], gader[9], gader[10]};
+		case 4: return new Gade[] {gader[11], gader[12], gader[13]};
+		case 5: return new Gade[] {gader[14], gader[15], gader[16]};
+		case 6: return new Gade[] {gader[17], gader[18], gader[19]};
+		case 7: return new Gade[] {gader[20], gader[21]};
+		default: return new Gade[0];
 		}
 	}
 	
-	public void betalLejeRederi(Rederi ejendom, Spiller spiller)
+	private void betalLejeRederi(Rederi ejendom, Spiller spiller)
 	{
 		int ejersAntalRederier = 0;
 		for (int i = 0; i < ANTAL_REDERIER; i++)
@@ -155,7 +242,7 @@ public class EjendomController {
 		g.opdaterAllesPenge();
 	}
 	
-	public void betalLejeBryggeri(Bryggeri ejendom, Spiller spiller)
+	private void betalLejeBryggeri(Bryggeri ejendom, Spiller spiller)
 	{
 		raflebæger.kastTerninger();
 		int leje = raflebæger.getSum();
