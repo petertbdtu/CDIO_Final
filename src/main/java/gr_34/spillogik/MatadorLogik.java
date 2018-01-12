@@ -81,18 +81,37 @@ public class MatadorLogik {
 		}
 		else if (ramtFelt instanceof GåIFængsel)
 		{
-			//TODO GåIFængsel Logik
 			g.sendBesked(nutidigSpiller.getNavn() + " går direkte i fængsel. IKKE IMPLEMENTERET");
+			int fængselPosition = 10;
+			nutidigSpiller.setPosition(fængselPosition);
+			ramtFelt = b.getFelt(fængselPosition);
 		}
 		else if (ramtFelt instanceof BetalSkatFelt)
 		{
-			//TODO BetalSkatFelt Logik
-			g.sendBesked(nutidigSpiller.getNavn() + " skal betale skat. IKKE IMPLEMENTERET");
+			int betalPris = ((BetalSkatFelt) ramtFelt).getBetalPris();
+			if(betalPris == 200) {
+				String valg = g.anmodValgKnap(nutidigSpiller.getNavn() + " skal betale skat.", "Betal indkomstskat 10%", "Betal 200kr.");
+				if(valg.equals("Betal 200kr.")) {
+					nutidigSpiller.fratrækPenge(betalPris);
+					g.opdaterAllesPenge();
+				} else {
+					int ejendomsSkat = (int) (nutidigSpiller.getPenge() * 0.10);
+					nutidigSpiller.fratrækPenge(ejendomsSkat);
+					g.opdaterAllesPenge();
+				}
+			} else {
+				g.sendBesked("Extraordinær statsskat " + nutidigSpiller.getNavn() + " skal betale 100kr.");
+				nutidigSpiller.fratrækPenge(betalPris);
+				g.opdaterAllesPenge();
+			}
+			
+				
 		}
 		else if (ramtFelt instanceof Parkering)
 		{
 			g.sendBesked(nutidigSpiller.getNavn() + " parkerer gratis.");
 		}
+		
 	}
 
 	public boolean isVundet() {

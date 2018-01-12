@@ -8,5 +8,9 @@ public class BetalSkatFelt extends AbstraktFelt {
 		super(beskrivelse, subText, titel);
 		this.betalPris = betalPris;
 	}
+
+	public int getBetalPris() {
+		return betalPris;
+	}
 	
 }

@@ -23,7 +23,7 @@ public class GUIBoundary {
 	GUI_Player[] players;
 	SpillerController sc;
 	BrætController bc;
-	
+
 	public GUIBoundary(BrætController bc)
 	{
 		this.bc = bc;
@@ -166,5 +166,9 @@ public class GUIBoundary {
 	
 	public void visTerning(int øjneVærdi0, int øjneVærdi1) {
 		gui.setDice(øjneVærdi0, øjneVærdi1);
+	}
+	
+	public void fjernSpiller(int spillerPos,int spillerIndex) {
+		this.fields[spillerPos].setCar(players[spillerIndex], false);
 	}
 }

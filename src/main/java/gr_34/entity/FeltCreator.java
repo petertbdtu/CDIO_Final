@@ -14,7 +14,7 @@ public class FeltCreator {
 		felter[2] = new ChanceFelt("", "Prøv lykken", "Prøv lykken");
 		int[] leje1 = {4, 20, 60, 180, 320, 510};
 		felter[3] = new Gade("", "", "Hvidovrevej", 60, 20, Color.GRAY, leje1, 50);
-		felter[4] = new BetalSkatFelt("", "", "", 0);
+		felter[4] = new BetalSkatFelt("", "", "", 200);
 		felter[5] = new Rederi("", "", "Øresund", 200, 100);
 		int[] leje2 = {6, 30, 90, 270, 400, 550};
 		felter[6] = new Gade("", "", "Roskildevej", 100, 50, Color.RED, leje2, 50);
@@ -62,7 +62,7 @@ public class FeltCreator {
 		felter[36] = new ChanceFelt("", "Prøv lykken", "Prøv lykken");
 		int[] leje15 = {35,175,500,1100,1300,1500};
 		felter[37] = new Gade("", "", "Frederiksberggade", 350, 175, new Color(120, 90, 60), leje15, 200);
-		felter[38] = new BetalSkatFelt("", "", "", 0);
+		felter[38] = new BetalSkatFelt("", "", "", 100);
 		int[] leje16 = {50,200,600,1400,1700,2000};
 		felter[39] = new Gade("", "", "Rådhuspladsen", 400, 200, new Color(120, 90, 60), leje16, 200);
 		

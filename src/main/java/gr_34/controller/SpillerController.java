@@ -44,9 +44,10 @@ public class SpillerController {
 	{
 		return spillere[nutidigSpillerIndex];
 	}
+	
 	public int getNutidigSpillerIndex()
 	{
 		return nutidigSpillerIndex;
-	}
+	}	
 	
 }
