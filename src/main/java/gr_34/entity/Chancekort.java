@@ -4,7 +4,7 @@ public class Chancekort {
 	private String beskrivelse;
 	private ChanceEffekt effekt;
 	
-	public Chancekort(String beskrivel-se, ChanceEffekt effekt) {
+	public Chancekort(String beskrivelse, ChanceEffekt effekt) {
 		this.beskrivelse = beskrivelse;
 		this.effekt = effekt;
 	}
