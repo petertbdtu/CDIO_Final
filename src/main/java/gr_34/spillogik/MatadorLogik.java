@@ -55,7 +55,34 @@ public class MatadorLogik {
 			g.opdaterAllesPenge();
 		}
 		
-		// Kan al spillerflytningsinstruks slås sammen ét sted?
+		flytSpiller(nutidigSpiller, gammelPosition, nyPosition);
+		
+		// Fortæller om spiller har en eneste mulighed for at købe hus:
+		int antalMuligheder = 0;
+		Boolean[] husMuligheder = e.fuldstændigtEjedeGrunde(nutidigSpiller);
+		for (int i = 0; i < husMuligheder.length; i++)
+		{
+			System.out.println(husMuligheder[i]);
+			if (husMuligheder[i]) antalMuligheder++;
+		}
+		
+		if (antalMuligheder > 0)
+		{
+			// TODO Huskøbslogik
+			if (g.anmodValgKnap("Vil du købe et hus?", "Ja", "Nej").equals("Ja"))
+			{
+				g.sendBesked("Du sagde ja");
+			}
+		}
+	}
+
+	/**
+	 * Flytter spilleren og kalder relevant logik.
+	 * @param nutidigSpiller
+	 * @param gammelPosition
+	 * @param nyPosition
+	 */
+	public void flytSpiller(Spiller nutidigSpiller, int gammelPosition, int nyPosition) {
 		g.flytSpiller(s.getNutidigSpillerIndex(), gammelPosition, nyPosition);
 		nutidigSpiller.setPosition(nyPosition);
 		
@@ -109,24 +136,6 @@ public class MatadorLogik {
 		else if (ramtFelt instanceof Parkering)
 		{
 			g.sendBesked(nutidigSpiller.getNavn() + " parkerer gratis.");
-		}
-		
-		// Fortæller om spiller har en eneste mulighed for at købe hus:
-		int antalMuligheder = 0;
-		Boolean[] husMuligheder = e.fuldstændigtEjedeGrunde(nutidigSpiller);
-		for (int i = 0; i < husMuligheder.length; i++)
-		{
-			System.out.println(husMuligheder[i]);
-			if (husMuligheder[i]) antalMuligheder++;
-		}
-		
-		if (antalMuligheder > 0)
-		{
-			// TODO Huskøbslogik
-			if (g.anmodValgKnap("Vil du købe et hus?", "Ja", "Nej").equals("Ja"))
-			{
-				g.sendBesked("Du sagde ja");
-			}
 		}
 	}
 
