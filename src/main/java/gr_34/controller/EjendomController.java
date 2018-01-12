@@ -98,7 +98,7 @@ public class EjendomController {
 		g.sendBesked(spiller.getNavn() + " lander på " + ejendom.getTitel() + " som er til salg.");
 		
 		String valg = g.anmodValgKnap(spiller.getNavn() + ", vil De købe " + ejendom.getTitel() +
-				" til " + ejendom.getPris() + "?", "Køb", "Sæt til auktion");
+				" til " + ejendom.getPris() + "?", "Køb", "Afslå køb");
 		
 		if (valg.equals("Køb"))
 		{
@@ -108,10 +108,6 @@ public class EjendomController {
 			g.opdaterAllesPenge();
 			g.sendBesked(spiller.getNavn() + " har købt " + ejendom.getTitel()
 			+ " for " + ejendom.getPris() + "kr.");
-		}
-		else
-		{
-			// TODO Auktionslogik
 		}
 	}
 	

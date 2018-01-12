@@ -62,7 +62,6 @@ public class MatadorLogik {
 		Boolean[] husMuligheder = e.fuldstændigtEjedeGrunde(nutidigSpiller);
 		for (int i = 0; i < husMuligheder.length; i++)
 		{
-			System.out.println(husMuligheder[i]);
 			if (husMuligheder[i]) antalMuligheder++;
 		}
 		
