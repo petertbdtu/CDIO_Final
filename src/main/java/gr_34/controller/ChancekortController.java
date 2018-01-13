@@ -38,7 +38,7 @@ public class ChancekortController {
 		switch(ce) {
 		case AktieModtag50:
 			spiller.tilføjPenge(50);
-			g.sendBesked(spiller.getNavn() + "modtager 50kr fra sine aktier.");
+			g.sendBesked(spiller.getNavn() + " modtager 50kr fra sine aktier.");
 			break;
 		case Betal100Vogn:
 			spiller.fratrækPenge(100);
@@ -75,13 +75,13 @@ public class ChancekortController {
 			break;
 		case RykFremTilStart:
 			ml.flytSpiller(spiller, spiller.getPosition(), 0);
-			g.sendBesked(spiller.getNavn() + "er gået frem mod start feltet, de modtager 200kr");
+			g.sendBesked(spiller.getNavn() + " er gået frem mod start feltet, de modtager 200kr");
 			spiller.tilføjPenge(200);
 			g.opdaterAllesPenge();
 			break;
 		case RykTilbageTilStart:
 			ml.flytSpiller(spiller, spiller.getPosition(), 0);
-			g.sendBesked(spiller.getNavn() + "rykker tilbage til start. De modtager ikke startpenge.");
+			g.sendBesked(spiller.getNavn() + " rykker tilbage til start. De modtager ikke startpenge.");
 			break;
 		case RykTreFelterTilbage:
 			ml.flytSpiller(spiller, spiller.getPosition(), (spiller.getPosition()-3)%40);

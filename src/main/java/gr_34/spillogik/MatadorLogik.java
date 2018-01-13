@@ -72,7 +72,7 @@ public class MatadorLogik {
 		// giver penge for at passere start.
 		// et normal slag bør ikke tillade en til at rykke baglens.
 		if (nyPosition < gammelPosition) {
-			g.sendBesked(navn + "har passeret start feltet, de modtager 200kr");
+			g.sendBesked(navn + " har passeret start feltet, de modtager 200kr");
 			nutidigSpiller.tilføjPenge(200);
 			g.opdaterAllesPenge();
 		}
