@@ -63,13 +63,12 @@ public class EjendomController {
 		if (ejendom.getEjer() != spiller)
 		{
 			// TODO logik iforhold til antal af ejede gader
-			int antalBygninger = ejendom.getAntalBygning();
-			spiller.fratrækPenge(ejendom.getLeje(antalBygninger));
-			ejendom.getEjer().tilføjPenge(ejendom.getLeje(antalBygninger));
+			spiller.fratrækPenge(ejendom.getLeje());
+			ejendom.getEjer().tilføjPenge(ejendom.getLeje());
 			g.opdaterAllesPenge();
 			g.sendBesked(spiller.getNavn() + " lander på " + ejendom.getTitel() + " som er ejet af "
 					+ ejendom.getEjer().getNavn() + ". " + spiller.getNavn() + " betaler " + ejendom.getEjer().getNavn()
-					+ " " + ejendom.getLeje(antalBygninger) + "kr."); 
+					+ " " + ejendom.getLeje() + "kr."); 
 		}
 		else
 			g.sendBesked(spiller.getNavn() + " er landet på en gade som De selv ejer");
@@ -229,15 +228,15 @@ public class EjendomController {
 	private Boolean[] harPladsTilHuse(Gade ... sætAfGrunde)
 	{
 		Boolean[] harPlads = new Boolean[sætAfGrunde.length];
-		int minimumHuse = sætAfGrunde[0].getAntalBygning();
+		int minimumHuse = sætAfGrunde[0].getAntalBygninger();
 		for (int i = 1; i < sætAfGrunde.length; i++)
 		{
-			if ( minimumHuse > sætAfGrunde[i].getAntalBygning() )
-				minimumHuse = sætAfGrunde[i].getAntalBygning();
+			if ( minimumHuse > sætAfGrunde[i].getAntalBygninger() )
+				minimumHuse = sætAfGrunde[i].getAntalBygninger();
 		}
 		for (int i = 0; i < sætAfGrunde.length; i++)
 		{
-			if (sætAfGrunde[i].getAntalBygning() >= minimumHuse)
+			if (sætAfGrunde[i].getAntalBygninger() >= minimumHuse)
 				harPlads[i] = true;
 		}
 		return harPlads;
