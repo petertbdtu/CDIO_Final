@@ -1,11 +1,13 @@
 package gr_34.controller;
 
+import java.util.Random;
+
 import gr_34.boundary.GUIBoundary;
 import gr_34.entity.ChanceEffekt;
 import gr_34.entity.Chancekort;
+import gr_34.entity.ChancekortCreator;
 import gr_34.entity.Spiller;
 import gr_34.spillogik.MatadorLogik;
-import gr_34.entity.ChancekortCreator;
 
 public class ChancekortController {
 	
