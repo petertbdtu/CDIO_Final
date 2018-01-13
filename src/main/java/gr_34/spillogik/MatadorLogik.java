@@ -21,32 +21,60 @@ public class MatadorLogik {
 	private EjendomController e;
 	private GUIBoundary g;
 	private Raflebæger raflebæger;
-	private boolean vundet = false;
+
+	private final int FÆNGSEL_POSITION = 10;
 	
-	public MatadorLogik(SpillerController s, BrætController b, EjendomController e,
-			GUIBoundary g, Raflebæger raflebæger) {
+
+	public MatadorLogik(SpillerController s, BrætController b, EjendomController e, GUIBoundary g,
+			Raflebæger raflebæger) {
 		this.s = s;
 		this.b = b;
 		this.e = e;
 		this.g = g;
 		this.raflebæger = raflebæger;
 	}
-	
+
 	public void UdførSpillerTur() {
-		
+
 		Spiller nutidigSpiller = s.getNutidigSpiller();
+
+		if (nutidigSpiller.erIFængsel())
+			udførFængselTur(nutidigSpiller);
+
+		if (!nutidigSpiller.erIFængsel())
+			udførNormalTur(nutidigSpiller);
+
+		// Fortæller om spiller har en eneste mulighed for at købe hus:
+		int antalMuligheder = 0;
+		Boolean[] husMuligheder = e.fuldstændigtEjedeGrunde(nutidigSpiller);
+		for (int i = 0; i < husMuligheder.length; i++) {
+			if (husMuligheder[i])
+				antalMuligheder++;
+		}
+
+		if (antalMuligheder > 0) {
+			// TODO Huskøbslogik
+			if (g.anmodValgKnap("Vil du købe et hus?", "Ja", "Nej").equals("Ja")) {
+				g.sendBesked("Du sagde ja");
+			}
+		}
+	}
+
+	/**
+	 * @param nutidigSpiller
+	 */
+	private void udførNormalTur(Spiller nutidigSpiller) {
 		String navn = nutidigSpiller.getNavn();
-		
-		//Sørg for at hvis man ryger i fængsel så trigger man ikke start penge.
+
 		raflebæger.kastTerninger();
 		int slag = raflebæger.getSum();
-		this.g.visTerning( raflebæger.getØjne0(), raflebæger.getØjne1() );
-		
-		
+		this.g.visTerning(raflebæger.getØjne0(), raflebæger.getØjne1());
+
 		int gammelPosition = nutidigSpiller.getPosition();
-		// modulo sørger for at den nye position ikke går udenfor vores mængde af felter.
+		// modulo sørger for at den nye position ikke går udenfor vores mængde af
+		// felter.
 		int nyPosition = (gammelPosition + slag) % b.getFelter().length;
-		
+
 		// giver penge for at passere start.
 		// et normal slag bør ikke tillade en til at rykke baglens.
 		if (nyPosition < gammelPosition) {
@@ -54,29 +82,56 @@ public class MatadorLogik {
 			nutidigSpiller.tilføjPenge(200);
 			g.opdaterAllesPenge();
 		}
-		
+
 		flytSpiller(nutidigSpiller, gammelPosition, nyPosition);
-		
-		// Fortæller om spiller har en eneste mulighed for at købe hus:
-		int antalMuligheder = 0;
-		Boolean[] husMuligheder = e.fuldstændigtEjedeGrunde(nutidigSpiller);
-		for (int i = 0; i < husMuligheder.length; i++)
-		{
-			if (husMuligheder[i]) antalMuligheder++;
-		}
-		
-		if (antalMuligheder > 0)
-		{
-			// TODO Huskøbslogik
-			if (g.anmodValgKnap("Vil du købe et hus?", "Ja", "Nej").equals("Ja"))
-			{
-				g.sendBesked("Du sagde ja");
+	}
+
+	private void udførFængselTur(Spiller nutidigSpiller) {
+		String navn = nutidigSpiller.getNavn();
+		String valg = g.anmodValgKnap(navn + " er i fængsel. De kan komme ud ved at betale eller slå to ens.",
+				"Betal 1000kr", "Slå terninger");
+
+		if (valg.equals("Betal 1000kr")) {
+			// Betal 1000kr
+			nutidigSpiller.fratrækPenge(1000);
+			nutidigSpiller.setIFængsel(false);
+			nutidigSpiller.nulstilFængselsTure();
+			g.opdaterAllesPenge();
+			g.sendBesked(navn + " har betalt 1000kr for at slippe ud af fængslet. Nyd deres frihed!");
+		} else {
+			// Slå terninger
+			
+			raflebæger.kastTerninger();
+			g.visTerning(raflebæger.getØjne0(), raflebæger.getØjne1());
+			
+			if (raflebæger.getØjne0() == raflebæger.getØjne1()) {
+				// To ens, frihed
+				nutidigSpiller.setIFængsel(false);
+				nutidigSpiller.nulstilFængselsTure();
+				g.opdaterAllesPenge();
+				g.sendBesked(navn + " har slået to ens. Nyd deres frihed!");
+			} else {
+				// Forskellige, ingen gratis løsladelse.
+				if (nutidigSpiller.getFængselsTure() >= 3) {
+					// Smid spiller ud, opkræv 1000kr
+					nutidigSpiller.fratrækPenge(1000);
+					nutidigSpiller.setIFængsel(false);
+					nutidigSpiller.nulstilFængselsTure();
+					g.opdaterAllesPenge();
+					g.sendBesked(navn + " er tvunget til at betale 1000kr for at slippe ud af fængslet.");
+				} else {
+					// Spiller forbliver i fængslet.
+					nutidigSpiller.forøgFængselsTure();
+					g.sendBesked(navn + " må desværre blive i fængslet. De har brugt " +
+					nutidigSpiller.getFængselsTure() + " af deres 3 terningekast forsøg.");
+				}
 			}
 		}
 	}
 
 	/**
 	 * Flytter spilleren og kalder relevant logik.
+	 * 
 	 * @param nutidigSpiller
 	 * @param gammelPosition
 	 * @param nyPosition
@@ -84,40 +139,31 @@ public class MatadorLogik {
 	public void flytSpiller(Spiller nutidigSpiller, int gammelPosition, int nyPosition) {
 		g.flytSpiller(s.getNutidigSpillerIndex(), gammelPosition, nyPosition);
 		nutidigSpiller.setPosition(nyPosition);
-		
+
 		AbstraktFelt ramtFelt = b.getFelt(nyPosition);
-		
-		if (ramtFelt instanceof AbstraktEjendom)
-		{
-			e.ramtEjendom( (AbstraktEjendom) ramtFelt, nutidigSpiller);
-		}
-		else if (ramtFelt instanceof ChanceFelt)
-		{
-			//TODO Chance logik
+
+		if (ramtFelt instanceof AbstraktEjendom) {
+			e.ramtEjendom((AbstraktEjendom) ramtFelt, nutidigSpiller);
+		} else if (ramtFelt instanceof ChanceFelt) {
+			// TODO Chance logik
 			g.sendBesked(nutidigSpiller.getNavn() + " skal trække et chancekort. IKKE IMPLEMENTERET");
 
-		}
-		else if (ramtFelt instanceof StartFelt)
-		{
+		} else if (ramtFelt instanceof StartFelt) {
 			g.sendBesked(nutidigSpiller.getNavn() + " er kommet tilbage start.");
-		}
-		else if (ramtFelt instanceof Fængsel)
-		{
+		} else if (ramtFelt instanceof Fængsel) {
 			g.sendBesked(nutidigSpiller.getNavn() + " er på besøg i fængslet.");
-		}
-		else if (ramtFelt instanceof GåIFængsel)
-		{
-			g.sendBesked(nutidigSpiller.getNavn() + " går direkte i fængsel. IKKE IMPLEMENTERET");
-			int fængselPosition = 10;
-			nutidigSpiller.setPosition(fængselPosition);
-			ramtFelt = b.getFelt(fængselPosition);
-		}
-		else if (ramtFelt instanceof BetalSkatFelt)
-		{
+		} else if (ramtFelt instanceof GåIFængsel) {
+			g.sendBesked(nutidigSpiller.getNavn() + " går direkte i fængsel.");
+			g.flytSpiller(s.getNutidigSpillerIndex(), nyPosition, FÆNGSEL_POSITION);
+			nutidigSpiller.setPosition(FÆNGSEL_POSITION);
+			nutidigSpiller.setIFængsel(true);
+			ramtFelt = b.getFelt(FÆNGSEL_POSITION);
+		} else if (ramtFelt instanceof BetalSkatFelt) {
 			int betalPris = ((BetalSkatFelt) ramtFelt).getBetalPris();
-			if(betalPris == 200) {
-				String valg = g.anmodValgKnap(nutidigSpiller.getNavn() + " skal betale skat.", "Betal indkomstskat 10%", "Betal 200kr.");
-				if(valg.equals("Betal 200kr.")) {
+			if (betalPris == 200) {
+				String valg = g.anmodValgKnap(nutidigSpiller.getNavn() + " skal betale skat.", "Betal indkomstskat 10%",
+						"Betal 200kr.");
+				if (valg.equals("Betal 200kr.")) {
 					nutidigSpiller.fratrækPenge(betalPris);
 					g.opdaterAllesPenge();
 				} else {
@@ -131,9 +177,7 @@ public class MatadorLogik {
 				g.opdaterAllesPenge();
 			}
 
-		}
-		else if (ramtFelt instanceof Parkering)
-		{
+		} else if (ramtFelt instanceof Parkering) {
 			g.sendBesked(nutidigSpiller.getNavn() + " parkerer gratis.");
 		}
 	}
@@ -142,7 +186,4 @@ public class MatadorLogik {
 		return s.harVinder();
 	}
 
-	public void setVundet(boolean vundet) {
-		this.vundet = vundet;
-	}
 }
