@@ -4,28 +4,28 @@ public class RaflebægerTestStubTaber extends Raflebæger {
 
 	private int[] testArray = {
 			2,3,
-			0,0,
+			1,-1,
 			
-			5,5,
-			0,0,
+			4,6,
+			1,-1,
 			
 			1,5,
-			0,0,
+			1,-1,
 			
-			1,1,
-			0,0,
+			0,2,
+			1,-1,
 			
 			1,0,
-			0,0,
+			1,-1,
 			
-			1,1,
-			0,0,
+			0,2,
+			1,-1,
 			
 			0,1,
-			0,0,
+			1,-1,
 			
-			1,1,
-			0,0,
+			0,2,
+			1,-1,
 			};
 	private int rollNum = 0;
 	
