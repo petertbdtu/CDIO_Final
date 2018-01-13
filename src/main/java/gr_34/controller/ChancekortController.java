@@ -25,40 +25,40 @@ public class ChancekortController {
 		switch(ce) {
 		case AktieModtag50:
 			spiller.tilføjPenge(50);
-			g.anmodString(spiller.getNavn() + "modtager 50kr fra sine aktier.");
+			g.sendBesked(spiller.getNavn() + "modtager 50kr fra sine aktier.");
 			break;
 		case Betal100Vogn:
 			spiller.fratrækPenge(100);
-			g.anmodString("De har anskaffet nye dæk til deres vogn, betal 100kr.");
+			g.sendBesked("De har anskaffet nye dæk til deres vogn, betal 100kr.");
 			break;
 		case BetalTold20:
 			spiller.fratrækPenge(20);
-			g.anmodString("De har været i udlandet og haft købt alt for "
+			g.sendBesked("De har været i udlandet og haft købt alt for "
 					+ "mange cigaretter med hjem- betal told 20kr.");
 			break;
 		case BetalVask10:
 			spiller.fratrækPenge(10);
-			g.anmodString("Betal for vognvask  og smøring 10kr.");
+			g.sendBesked("Betal for vognvask  og smøring 10kr.");
 			break;
 		case FuldStop100:
 			spiller.fratrækPenge(100);
-			g.anmodString("Du har kørt frem for fuld stop, betal 100kr.");
+			g.sendBesked("Du har kørt frem for fuld stop, betal 100kr.");
 			break;
 		case GåTilRådhus:
 			ml.flytSpiller(spiller, spiller.getPosition(), 39);
-			g.anmodString("Tag ind på rådhuspladsen");
+			g.sendBesked("Tag ind på rådhuspladsen");
 			break;
 		case Modtag20:
 			spiller.tilføjPenge(20);
-			g.anmodString("De har solgt deres gamle klude, de modtager 20kr.");
+			g.sendBesked("De har solgt deres gamle klude, de modtager 20kr.");
 			break;
 		case PBøde20:
 			spiller.fratrækPenge(20);
-			g.anmodString("De har måttet vedtage en parkeringsbøde. Betal 20kr.");
+			g.sendBesked("De har måttet vedtage en parkeringsbøde. Betal 20kr.");
 			break;
 		case Præmie100:
 			spiller.tilføjPenge(100);
-			g.anmodString("Deres præmieobligation er kommet ud. De modtager 100kr");
+			g.sendBesked("Deres præmieobligation er kommet ud. De modtager 100kr");
 			break;
 		case RykFremTilStart:
 			ml.flytSpiller(spiller, spiller.getPosition(), 0);
@@ -68,11 +68,11 @@ public class ChancekortController {
 			break;
 		case RykTilbageTilStart:
 			ml.flytSpiller(spiller, spiller.getPosition(), 0);
-			g.anmodString(spiller.getNavn() + "rykker tilbage til start. De modtager ikke startpenge.");
+			g.sendBesked(spiller.getNavn() + "rykker tilbage til start. De modtager ikke startpenge.");
 			break;
 		case RykTreFelterTilbage:
 			ml.flytSpiller(spiller, spiller.getPosition(), (spiller.getPosition()-3)%40);
-			g.anmodString("De glider på en bananskrald, ryk tre felter tilbage.");
+			g.sendBesked("De glider på en bananskrald, ryk tre felter tilbage.");
 			break;
 		default:
 			break;
