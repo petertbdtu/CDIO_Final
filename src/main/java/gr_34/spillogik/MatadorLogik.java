@@ -43,21 +43,6 @@ public class MatadorLogik {
 
 		if (!nutidigSpiller.erIFængsel())
 			udførNormalTur(nutidigSpiller);
-
-		// Fortæller om spiller har en eneste mulighed for at købe hus:
-		int antalMuligheder = 0;
-		Boolean[] husMuligheder = e.fuldstændigtEjedeGrunde(nutidigSpiller);
-		for (int i = 0; i < husMuligheder.length; i++) {
-			if (husMuligheder[i])
-				antalMuligheder++;
-		}
-
-		if (antalMuligheder > 0) {
-			// TODO Huskøbslogik
-			if (g.anmodValgKnap("Vil du købe et hus?", "Ja", "Nej").equals("Ja")) {
-				g.sendBesked("Du sagde ja");
-			}
-		}
 	}
 
 	/**
