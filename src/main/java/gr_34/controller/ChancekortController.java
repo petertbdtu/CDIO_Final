@@ -5,16 +5,27 @@ import gr_34.entity.ChanceEffekt;
 import gr_34.entity.Chancekort;
 import gr_34.entity.Spiller;
 import gr_34.spillogik.MatadorLogik;
+import gr_34.entity.ChancekortCreator;
 
 public class ChancekortController {
 	
+	
 	private GUIBoundary g;
-	private Chancekort[] c;
+	Chancekort[] chancekort;
 	private ChanceEffekt ce;
 	private MatadorLogik ml;
-	
+		
 	public ChancekortController(GUIBoundary g) {
+		chancekort = ChancekortCreator.getChancekort();
 		this.g = g;
+	}
+	
+	public Chancekort[] getChancekort() {
+		return this.chancekort;
+	}
+	
+	public Chancekort getKort(int KortNummer) {
+		return chancekort[KortNummer];
 	}
 	
 	public void getLogik(MatadorLogik ml) {
@@ -78,4 +89,59 @@ public class ChancekortController {
 			break;
 		}	
 	}
+	
+	public int getLength() {
+		return chancekort.length;
+	}
+	
+
+
+	public void bland() {
+
+		// Kopieret fra løsningsforslag til kortspil lektion 8.
+
+		Chancekort[] tempBunke = new Chancekort[chancekort.length];
+
+		Random rn = new Random();
+
+		int count = 0;
+
+		do{
+
+			int i = rn.nextInt(chancekort.length);
+
+			if (tempBunke[i] == null) {
+
+				tempBunke[i] = chancekort[count];
+
+				count++;
+
+			}
+
+		} while (count < chancekort.length);
+
+		chancekort = tempBunke;
+
+	}
+	
+	public Chancekort trækKort() {
+
+		// Tag øverste kort
+
+		Chancekort trukket = chancekort[chancekort.length - 1];
+
+		// Læg tilbage i bunden
+
+		for (int i = chancekort.length-1; i > 0; i--) {
+
+			chancekort[i] = chancekort[i - 1];
+
+		}
+
+		chancekort[0] = trukket;
+
+		return trukket;
+
+	}
+	
 }
