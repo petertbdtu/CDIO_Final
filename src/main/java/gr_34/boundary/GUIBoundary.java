@@ -18,11 +18,11 @@ import gui_main.GUI;
 
 public class GUIBoundary {
 	
-	GUI gui;
-	GUI_Field[] fields;
-	GUI_Player[] players;
-	SpillerController sc;
-	BrætController bc;
+	private GUI gui;
+	private GUI_Field[] fields;
+	private GUI_Player[] players;
+	private SpillerController sc;
+	private BrætController bc;
 
 	public GUIBoundary(BrætController bc)
 	{

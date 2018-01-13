@@ -5,7 +5,7 @@ import gr_34.entity.FeltCreator;
 
 public class BrætController {
 
-	AbstraktFelt[] felter;
+	private AbstraktFelt[] felter;
 	
 	public BrætController()
 	{
