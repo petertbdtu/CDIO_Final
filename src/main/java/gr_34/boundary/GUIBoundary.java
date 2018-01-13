@@ -171,4 +171,8 @@ public class GUIBoundary {
 	public void fjernSpiller(int spillerPos,int spillerIndex) {
 		this.fields[spillerPos].setCar(players[spillerIndex], false);
 	}
+	
+	public void vischanceKort(String txt) {
+		gui.displayChanceCard(txt);
+	}
 }
