@@ -2,7 +2,7 @@ package gr_34.entity;
 
 public class ChancekortCreator {
 	
-	public Chancekort[] getChancekort() {
+	public static Chancekort[] getChancekort() {
 		 Chancekort[] ck = new  Chancekort[12];
 		 
 		ck[0] = new Chancekort(ChanceEffekt.GåTilRådhus);
