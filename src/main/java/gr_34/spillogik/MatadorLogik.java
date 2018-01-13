@@ -2,6 +2,7 @@ package gr_34.spillogik;
 
 import gr_34.boundary.GUIBoundary;
 import gr_34.controller.BrætController;
+import gr_34.controller.ChancekortController;
 import gr_34.controller.EjendomController;
 import gr_34.controller.Raflebæger;
 import gr_34.controller.SpillerController;
@@ -20,18 +21,20 @@ public class MatadorLogik {
 	private BrætController b;
 	private EjendomController e;
 	private GUIBoundary g;
+	private ChancekortController c;
 	private Raflebæger raflebæger;
 
 	private final int FÆNGSEL_POSITION = 10;
 	
 
 	public MatadorLogik(SpillerController s, BrætController b, EjendomController e, GUIBoundary g,
-			Raflebæger raflebæger) {
+			Raflebæger raflebæger, ChancekortController c) {
 		this.s = s;
 		this.b = b;
 		this.e = e;
 		this.g = g;
 		this.raflebæger = raflebæger;
+		this.c = c;
 	}
 
 	public void UdførSpillerTur() {
@@ -80,15 +83,15 @@ public class MatadorLogik {
 	private void udførFængselTur(Spiller nutidigSpiller) {
 		String navn = nutidigSpiller.getNavn();
 		String valg = g.anmodValgKnap(navn + " er i fængsel. De kan komme ud ved at betale eller slå to ens.",
-				"Betal 1000kr", "Slå terninger");
+				"Betal 200kr", "Slå terninger");
 
-		if (valg.equals("Betal 1000kr")) {
-			// Betal 1000kr
-			nutidigSpiller.fratrækPenge(1000);
+		if (valg.equals("Betal 200kr")) {
+			// Betal 200kr
+			nutidigSpiller.fratrækPenge(200);
 			nutidigSpiller.setIFængsel(false);
 			nutidigSpiller.nulstilFængselsTure();
 			g.opdaterAllesPenge();
-			g.sendBesked(navn + " har betalt 1000kr for at slippe ud af fængslet. Nyd deres frihed!");
+			g.sendBesked(navn + " har betalt 200kr for at slippe ud af fængslet. Nyd deres frihed!");
 		} else {
 			// Slå terninger
 			
@@ -100,16 +103,16 @@ public class MatadorLogik {
 				nutidigSpiller.setIFængsel(false);
 				nutidigSpiller.nulstilFængselsTure();
 				g.opdaterAllesPenge();
-				g.sendBesked(navn + " har slået to ens. Nyd deres frihed!");
+				g.sendBesked(navn + " har slået to ens. Nyd deres GRATIS frihed!");
 			} else {
 				// Forskellige, ingen gratis løsladelse.
 				if (nutidigSpiller.getFængselsTure() >= 3) {
-					// Smid spiller ud, opkræv 1000kr
-					nutidigSpiller.fratrækPenge(1000);
+					// Smid spiller ud, opkræv 200kr
+					nutidigSpiller.fratrækPenge(200);
 					nutidigSpiller.setIFængsel(false);
 					nutidigSpiller.nulstilFængselsTure();
 					g.opdaterAllesPenge();
-					g.sendBesked(navn + " er tvunget til at betale 1000kr for at slippe ud af fængslet.");
+					g.sendBesked(navn + " er tvunget til at betale 200kr for at slippe ud af fængslet.");
 				} else {
 					// Spiller forbliver i fængslet.
 					nutidigSpiller.forøgFængselsTure();
@@ -136,9 +139,7 @@ public class MatadorLogik {
 		if (ramtFelt instanceof AbstraktEjendom) {
 			e.ramtEjendom((AbstraktEjendom) ramtFelt, nutidigSpiller);
 		} else if (ramtFelt instanceof ChanceFelt) {
-			// TODO Chance logik
-			g.sendBesked(nutidigSpiller.getNavn() + " skal trække et chancekort. IKKE IMPLEMENTERET");
-
+			c.udførChanceFelt(nutidigSpiller);
 		} else if (ramtFelt instanceof StartFelt) {
 			g.sendBesked(nutidigSpiller.getNavn() + " er kommet tilbage start.");
 		} else if (ramtFelt instanceof Fængsel) {
@@ -176,5 +177,4 @@ public class MatadorLogik {
 	public boolean isVundet() {
 		return s.harVinder();
 	}
-
 }

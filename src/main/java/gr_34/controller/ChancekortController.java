@@ -14,11 +14,11 @@ public class ChancekortController {
 	
 	private GUIBoundary g;
 	Chancekort[] chancekort;
-	private ChanceEffekt ce;
 	private MatadorLogik ml;
 		
 	public ChancekortController(GUIBoundary g) {
 		chancekort = ChancekortCreator.getChancekort();
+		bland();
 		this.g = g;
 	}
 	
@@ -30,11 +30,11 @@ public class ChancekortController {
 		return chancekort[KortNummer];
 	}
 	
-	public void getLogik(MatadorLogik ml) {
+	public void indlæsLogik(MatadorLogik ml) {
 		this.ml = ml;
 	}
 	
-	public void udførEffekt(Spiller spiller) {
+	public void udførEffekt(Spiller spiller, ChanceEffekt ce) {
 		switch(ce) {
 		case AktieModtag50:
 			spiller.tilføjPenge(50);
@@ -96,8 +96,6 @@ public class ChancekortController {
 		return chancekort.length;
 	}
 	
-
-
 	public void bland() {
 
 		// Kopieret fra løsningsforslag til kortspil lektion 8.
@@ -146,4 +144,8 @@ public class ChancekortController {
 
 	}
 	
+	public void udførChanceFelt(Spiller spiller) {
+		ChanceEffekt ce = trækKort().getEffekt();
+		udførEffekt(spiller, ce);
+	}
 }

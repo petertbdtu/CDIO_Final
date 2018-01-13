@@ -10,7 +10,7 @@ public class MatadorController {
 
 	public void playGame()
 	{
-		Raflebæger raflebæger = new RaflebægerTestStubFængsel();
+		Raflebæger raflebæger = new Raflebæger();
 		
 		BrætController bræt = new BrætController();
 		
@@ -20,10 +20,14 @@ public class MatadorController {
 		
 		SpillerController sc = new SpillerController(guiB);
 		sc.opretSpillere(1500);
-
+		
 		guiB.indlæsSpillere(sc);
 		
-		MatadorLogik matador = new MatadorLogik(sc, bræt, e, guiB, raflebæger);
+		ChancekortController c = new ChancekortController(guiB);
+		
+		MatadorLogik matador = new MatadorLogik(sc, bræt, e, guiB, raflebæger, c);
+		
+		c.indlæsLogik(matador);
 		
 		do 
 		{
