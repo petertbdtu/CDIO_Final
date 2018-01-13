@@ -25,7 +25,7 @@ public class SpillerController {
 		spillere = new Spiller[antalSpillere];
 		for (int i = 0; i < antalSpillere; i++)
 		{
-			String navn = this.guiB.anmodString("Indtast " + i +". spillers navn");
+			String navn = this.guiB.anmodString("Indtast " + (i+1) +". spillers navn");
 			spillere[i] = new Spiller(navn, startBalance);
 		}
 	}
