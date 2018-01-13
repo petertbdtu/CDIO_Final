@@ -37,9 +37,35 @@ public class SpillerController {
 	
 	public void gåTilNæsteSpiller()
 	{
-		nutidigSpillerIndex = (nutidigSpillerIndex+1) % antalSpillere;
+		if (spillere[nutidigSpillerIndex].getEkstraTur())
+		{
+			spillere[nutidigSpillerIndex].setEkstraTur(false);
+			spillere[nutidigSpillerIndex].forøgAntalEkstraTur();
+			
+			if (spillere[nutidigSpillerIndex].getAntalEkstraTure() >= 3)
+			{
+				// TODO Spiller skal fængsles efter 3 ekstra ture.
+				guiB.sendBesked("Spiller burde fængsles!");
+				
+			}
+			else
+			{
+				// Spiller får sin ekstra tur.
+				guiB.sendBesked(spillere[nutidigSpillerIndex].getNavn() +
+						" slog to ens så De får en ekstra tur!");
+			}
+			
+		}
+		else // Skifter spiller hvis de ikke har ekstra tur.
+		{
+			spillere[nutidigSpillerIndex].nulstilAntalEkstraTur();
+			nutidigSpillerIndex = (nutidigSpillerIndex+1) % antalSpillere;
+		}
+		
+		// Springer spillere over hvis de er gået fallit. Inklusiv dem med ekstra tur.
 		if (spillere[nutidigSpillerIndex].erFallit())
-				gåTilNæsteSpiller();
+			gåTilNæsteSpiller();
+		
 	}
 	
 	public Spiller getNutidigSpiller() 

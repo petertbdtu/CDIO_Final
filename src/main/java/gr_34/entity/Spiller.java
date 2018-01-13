@@ -7,6 +7,8 @@ public class Spiller {
 	private Boolean fallit;
 	private boolean iFængsel;
 	private int antalFængselsTure;
+	private boolean ekstraTur;
+	private int antalEkstraTure;
 
 	public Spiller(String navn, int startBalance) {
 		this.konto = new Konto(startBalance);
@@ -73,4 +75,28 @@ public class Spiller {
 		return antalFængselsTure;
 	}
 	
+	public boolean getEkstraTur()
+	{
+		return ekstraTur;
+	}
+	
+	public void setEkstraTur(boolean ekstraTur)
+	{
+		this.ekstraTur = ekstraTur;
+	}
+	
+	public int getAntalEkstraTure()
+	{
+		return this.antalEkstraTure;
+	}
+	
+	public void forøgAntalEkstraTur()
+	{
+		this.antalEkstraTure++;
+	}
+	
+	public void nulstilAntalEkstraTur()
+	{
+		this.antalEkstraTure = 0;
+	}
 }

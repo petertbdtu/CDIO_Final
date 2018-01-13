@@ -3,16 +3,12 @@ package gr_34.controller;
 public class RaflebægerTestStubFængsel extends Raflebæger {
 
 	private int[] testArray = {
-			6,6,
-			1,-1,
-			
-			6,6,
-			1,-1,
-			
-			3,3,
-			1,-1,
-			
-			3,3,
+			1,1,
+			1,1,
+			1,1,
+			2,3,
+			2,3,
+			1,1,
 			};
 	private int rollNum = 0;
 	

@@ -69,7 +69,13 @@ public class MatadorLogik {
 		raflebæger.kastTerninger();
 		int slag = raflebæger.getSum();
 		this.g.visTerning(raflebæger.getØjne0(), raflebæger.getØjne1());
-
+		
+		// Ekstra tur hvis man slår to ens
+		if (raflebæger.getØjne0() == raflebæger.getØjne1())
+		{
+			nutidigSpiller.setEkstraTur(true);
+		}
+		
 		int gammelPosition = nutidigSpiller.getPosition();
 		// modulo sørger for at den nye position ikke går udenfor vores mængde af
 		// felter.
