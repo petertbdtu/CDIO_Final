@@ -90,21 +90,21 @@ public class ChancekortController {
 			g.opdaterAllesPenge();
 			break;
 		case RykFremTilStart:
-			ml.flytSpiller(spiller, spiller.getPosition(), 0);
 			g.vischanceKort(spiller.getNavn() + " er gået frem mod start feltet, de modtager 200kr");
 			g.sendBesked(" ");
+			ml.flytSpiller(spiller, spiller.getPosition(), 0);
 			spiller.tilføjPenge(200);
 			g.opdaterAllesPenge();
 			break;
 		case RykTilbageTilStart:
-			ml.flytSpiller(spiller, spiller.getPosition(), 0);
 			g.vischanceKort(spiller.getNavn() + " rykker tilbage til start. De modtager ikke startpenge.");
 			g.sendBesked(" ");
+			ml.flytSpiller(spiller, spiller.getPosition(), 0);
 			break;
 		case RykTreFelterTilbage:
-			ml.flytSpiller(spiller, spiller.getPosition(), (spiller.getPosition()-3)%40);
 			g.vischanceKort(spiller.getNavn() + " glider på en bananskrald, ryk tre felter tilbage.");
 			g.sendBesked(" ");
+			ml.flytSpiller(spiller, spiller.getPosition(), (spiller.getPosition()-3)%40);
 			break;
 		default:
 			break;
