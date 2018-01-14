@@ -106,7 +106,7 @@ public class MatadorLogik {
 				g.sendBesked(navn + " har slået to ens. Nyd deres GRATIS frihed!");
 			} else {
 				// Forskellige, ingen gratis løsladelse.
-				if (nutidigSpiller.getFængselsTure() >= 3) {
+				if (nutidigSpiller.getFængselsTure() > 3) {
 					// Smid spiller ud, opkræv 200kr
 					nutidigSpiller.fratrækPenge(200);
 					nutidigSpiller.setIFængsel(false);
