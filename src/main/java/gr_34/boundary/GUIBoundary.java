@@ -28,7 +28,7 @@ public class GUIBoundary {
 	{
 		this.bc = bc;
 		
-		indlæsFelter(bc.getFelter());
+		indlæsFelter(this.bc.getFelter());
 		this.gui = new GUI(fields);
 	}
 

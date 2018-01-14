@@ -40,46 +40,54 @@ public class ChancekortController {
 			spiller.tilføjPenge(50);
 			g.vischanceKort(spiller.getNavn() + " har haft held med sine aktier. De modtager 50kr.");
 			g.sendBesked(" ");
+			g.opdaterAllesPenge();
 			break;
 		case Betal100Vogn:
 			spiller.fratrækPenge(100);
-			g.vischanceKort("De har anskaffet nye dæk til deres vogn, betal 100kr.");
+			g.vischanceKort(spiller.getNavn() + " har anskaffet nye dæk til sin vogn, betal 100kr.");
 			g.sendBesked(" ");
+			g.opdaterAllesPenge();
 			break;
 		case BetalTold20:
 			spiller.fratrækPenge(20);
-			g.vischanceKort("De har været i udlandet og haft købt alt for mange cigaretter med hjem. Betal told 20kr.");
+			g.vischanceKort(spiller.getNavn() + " har været i udlandet og haft købt alt for mange cigaretter med hjem. Betal told 20kr.");
 			g.sendBesked(" ");
+			g.opdaterAllesPenge();
 			break;
 		case BetalVask10:
 			spiller.fratrækPenge(10);
-			g.vischanceKort("Betal for vognvask  og smøring 10kr.");
+			g.vischanceKort(spiller.getNavn() + " skal betale for vognvask og smøring 10kr.");
 			g.sendBesked(" ");
+			g.opdaterAllesPenge();
 			break;
 		case FuldStop100:
 			spiller.fratrækPenge(100);
-			g.vischanceKort("Du har kørt frem for fuld stop, betal 100kr.");
+			g.vischanceKort(spiller.getNavn() + " har kørt frem for fuld stop, betal 100kr.");
 			g.sendBesked(" ");
+			g.opdaterAllesPenge();
 			break;
 		case GåTilRådhus:
-			ml.flytSpiller(spiller, spiller.getPosition(), 39);
-			g.vischanceKort("Tag ind på rådhuspladsen");
+			g.vischanceKort(spiller.getNavn() + ", tag ind på rådhuspladsen");
 			g.sendBesked(" ");
+			ml.flytSpiller(spiller, spiller.getPosition(), 39);
 			break;
 		case Modtag20:
 			spiller.tilføjPenge(20);
-			g.vischanceKort("De har solgt deres gamle klude, de modtager 20kr.");
+			g.vischanceKort(spiller.getNavn() + " har solgt sine gamle klude, De modtager 20kr.");
 			g.sendBesked(" ");
+			g.opdaterAllesPenge();
 			break;
 		case PBøde20:
 			spiller.fratrækPenge(20);
-			g.vischanceKort("De har måttet vedtage en parkeringsbøde. Betal 20kr.");
+			g.vischanceKort(spiller.getNavn() + " har måttet vedtage en parkeringsbøde. Betal 20kr.");
 			g.sendBesked(" ");
+			g.opdaterAllesPenge();
 			break;
 		case Præmie100:
 			spiller.tilføjPenge(100);
-			g.vischanceKort("Deres præmieobligation er kommet ud. De modtager 100kr");
+			g.vischanceKort(spiller.getNavn() + ", deres præmieobligation er kommet ud. De modtager 100kr");
 			g.sendBesked(" ");
+			g.opdaterAllesPenge();
 			break;
 		case RykFremTilStart:
 			ml.flytSpiller(spiller, spiller.getPosition(), 0);
@@ -95,7 +103,7 @@ public class ChancekortController {
 			break;
 		case RykTreFelterTilbage:
 			ml.flytSpiller(spiller, spiller.getPosition(), (spiller.getPosition()-3)%40);
-			g.vischanceKort("De glider på en bananskrald, ryk tre felter tilbage.");
+			g.vischanceKort(spiller.getNavn() + " glider på en bananskrald, ryk tre felter tilbage.");
 			g.sendBesked(" ");
 			break;
 		default:
