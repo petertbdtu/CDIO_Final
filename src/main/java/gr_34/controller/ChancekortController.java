@@ -102,7 +102,7 @@ public class ChancekortController {
 			ml.flytSpiller(spiller, spiller.getPosition(), 0);
 			break;
 		case RykTreFelterTilbage:
-			g.vischanceKort(spiller.getNavn() + " glider på en bananskrald, ryk tre felter tilbage.");
+			g.vischanceKort(spiller.getNavn() + " glider på en bananskræl, ryk tre felter tilbage.");
 			g.sendBesked(" ");
 			ml.flytSpiller(spiller, spiller.getPosition(), (spiller.getPosition()-3)%40);
 			break;
