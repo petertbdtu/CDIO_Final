@@ -62,7 +62,6 @@ public class EjendomController {
 	private void ramtGade(Gade ejendom, Spiller spiller) {
 		if (ejendom.getEjer() != spiller)
 		{
-			// TODO logik iforhold til antal af ejede gader
 			spiller.fratrækPenge(ejendom.getLeje());
 			ejendom.getEjer().tilføjPenge(ejendom.getLeje());
 			g.opdaterAllesPenge();
@@ -103,7 +102,6 @@ public class EjendomController {
 		{
 			spiller.fratrækPenge(ejendom.getPris());
 			ejendom.setEjer(spiller);
-			// TODO Sæt ejer grafisk (ejer og farve osv.)
 			g.opdaterAllesPenge();
 			g.sendBesked(spiller.getNavn() + " har købt " + ejendom.getTitel()
 			+ " for " + ejendom.getPris() + "kr.");

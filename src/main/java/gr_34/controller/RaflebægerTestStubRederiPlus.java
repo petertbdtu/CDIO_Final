@@ -20,18 +20,21 @@ public class RaflebægerTestStubRederiPlus extends Raflebæger {
 			2,4, // Leje 2
 			
 			6,3, // Fængselsbesøg
-			3,3, // Chancekort (Ikke implementeret, kræver yderligere teststub)
+			3,4, // Valby Langgade 
 			
 			0,2, // Køb Tuborg
-			2,3, // Leje Tuborg
-			5,6, // Udregning af leje m. et bryggeri, (6+6)*4 = 48
+			1,3, // Leje Tuborg
+			6,6, // Udregning af leje m. et bryggeri, (6+6)*4 = 48
 			
 			3,5, // Helle
 			4,3, // Køb Strandvej af anden spiller
 			
 			3,5, // Køb Carlsberg
 			6,3, // Leje Carlsberg
-			0,2, // Udregning af leje m. begge bryggerier, (1+1)*10 = 20
+			1,1, // Udregning af leje m. begge bryggerier, (1+1)*10 = 20
+			
+			2,3, // Chancefelt
+			1,1, // Fængsel med ekstra tur
 			
 			};
 	private int rollNum = 0;
